@@ -1,0 +1,504 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% ---------------------------------------------------------------------------
+% Unicode -> LaTeX mappings so these documents compile and render correctly
+% under xelatex (and pdflatex) without depending on a particular system font.
+% Every non-ASCII glyph used in the course text is mapped explicitly; this is
+% needed because the documents use mathematical symbols inside running text
+% and inside inline-code spans, where unicode-math would otherwise treat them
+% as math-only and abort.
+% ---------------------------------------------------------------------------
+\usepackage{amssymb}
+\usepackage{newunicodechar}
+
+% --- Greek (lower case) ---
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ν}{\ensuremath{\nu}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{ς}{\ensuremath{\varsigma}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+% --- Greek (capitals) ---
+\newunicodechar{Γ}{\ensuremath{\Gamma}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+
+% --- Math symbols ---
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}}
+\newunicodechar{∂}{\ensuremath{\partial}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{∫}{\ensuremath{\int}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{½}{\textonehalf}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{⟶}{\ensuremath{\longrightarrow}}
+
+% --- Superscripts / modifier letters ---
+\newunicodechar{²}{\ensuremath{^{2}}}
+\newunicodechar{³}{\ensuremath{^{3}}}
+\newunicodechar{⁺}{\ensuremath{^{+}}}
+\newunicodechar{⁻}{\ensuremath{^{-}}}
+\newunicodechar{ᵀ}{\ensuremath{^{\mathsf{T}}}}
+\newunicodechar{ᵏ}{\ensuremath{^{k}}}
+
+% --- Punctuation / misc text symbols ---
+\newunicodechar{…}{\textellipsis}
+\newunicodechar{§}{\S}
+\newunicodechar{⚑}{\textbf{[!]}}
+
+% --- Accented Latin (author names) ---
+\newunicodechar{Á}{\'A}
+\newunicodechar{Ø}{\O}
+\newunicodechar{ä}{\"a}
+\newunicodechar{é}{\'e}
+\newunicodechar{ó}{\'o}
+\newunicodechar{ô}{\^o}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Problem Sets},
+  pdfauthor={North Carolina State University · Financial Mathematics},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Problem Sets}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Optimal Market Making for Cryptocurrency Options --- The
+Avellaneda--Stoikov Framework and its Extension to Options}
+\author{North Carolina State University · Financial Mathematics}
+\date{Summer 2026}
+
+\begin{document}
+\maketitle
+
+\includegraphics[width=2.6in,height=\textheight,keepaspectratio]{assets/ncsu_logo.png}
+
+\section{Problem Sets}\label{problem-sets}
+
+\textbf{Optimal Market Making for Cryptocurrency Options}
+
+\emph{The Avellaneda--Stoikov Framework and its Extension to Options}
+
+North Carolina State University --- Summer 2026
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Instructions}\label{instructions}
+
+These are the weekly programming assignments for Weeks 2--10 (Week 1 was
+the introduction week and had no graded set).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Problem sets are written in Python}, using \textbf{PyTorch} as
+  the numerical engine. Use PyTorch autograd for all derivatives
+  (Greeks, Jacobians, gradients) --- you are \textbf{not} asked to
+  hand-derive or hand-code algorithmic differentiation.
+\item
+  \textbf{Week 7 is the exception}: it is written in \textbf{C++} and
+  called from Python through a \textbf{\texttt{pybind11}} binding. A
+  \texttt{CMakeLists.txt} scaffold is provided.
+\item
+  Each problem set ships with a starter repository: data loaders, a test
+  harness (\texttt{pytest}), and (Week 7) the \texttt{pybind11}/CMake
+  scaffold.
+\item
+  Emit numerical results as CSV and figures as PNG for inclusion in your
+  write-up. Where a problem asks for a comment, print it from your code
+  as a short summary of the actual numbers.
+\item
+  Submissions are due Sunday 23:59 Eastern. Set seeds for
+  reproducibility.
+\end{itemize}
+
+Worked solutions are distributed separately in the \textbf{Solutions}
+booklet after each deadline.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{Problem Set 2 --- Foundations of Market
+Microstructure
+\emph{(Python)}}{Problem Set 2 --- Foundations of Market Microstructure (Python)}}\label{problem-set-2-foundations-of-market-microstructure-python}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Order-book reconstruction.} Implement a Python class
+  \texttt{L2Book} that consumes a stream of events (\texttt{new},
+  \texttt{cancel}, \texttt{modify}, \texttt{trade}) and maintains the L2
+  state in a price-keyed structure (e.g.~two \texttt{SortedDict}s).
+  Apply it to one hour of Coincall BTC-PERP data and emit a CSV of
+  mid-price and quoted spread over time. Remember to remove price levels
+  that become empty after a cancel.
+\item
+  \textbf{Roll estimator.} Compute the Roll effective-spread estimator
+  \texttt{2*sqrt(-cov(Deltap\_t,\ Deltap\_\{t-1\}))} on the same sample
+  and compare it to the directly observed bid-ask spread. Print both and
+  their discrepancy.
+\item
+  \textbf{Glosten--Milgrom quote-setter.} Implement the rational
+  quote-setter as a PyTorch belief update: given an informed-trade
+  probability and a prior over the asset value, compute bid and ask from
+  the Bayesian posterior after a buy or a sell. Unit-test against a
+  hand-computed one-trade sequence.
+\item
+  \textbf{Glosten--Milgrom simulation.} Build a Monte Carlo simulator
+  reusing problem 3 and emit a CSV of the public belief converging to
+  the true value, averaged over many runs.
+\item
+  \textbf{Toxicity.} Compute realized spread and price impact over a
+  5-minute decomposition window on one hour of Coincall data; print a
+  summary relating the numbers to order-flow toxicity.
+\end{enumerate}
+
+\subsection{\texorpdfstring{Problem Set 3 --- The Avellaneda--Stoikov
+Model
+\emph{(Python/PyTorch)}}{Problem Set 3 --- The Avellaneda--Stoikov Model (Python/PyTorch)}}\label{problem-set-3-the-avellanedastoikov-model-pythonpytorch}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Reduced ODE solver.} Implement a PyTorch backward integrator
+  for the reduced system in \texttt{theta(t,\ q)} arising from the
+  ansatz \texttt{V\ =\ -exp(-gamma(x+qS))*theta(t,q)}. Emit
+  \texttt{theta} on a \texttt{(t,\ q)} grid.
+\item
+  \textbf{Closed-form quotes.} Implement the asymptotic reservation
+  price \texttt{r\ =\ S\ -\ qgammasigma\^{}2(T-t)} and half-spread
+  \texttt{delta\ =\ (1/gamma)*ln(1+gamma/kappa)\ +\ (gammasigma\^{}2/2)(T-t)}
+  as a reusable function, and \texttt{pytest} it against the solver from
+  problem 1 where they should agree.
+\item
+  \textbf{Quote engine + simulation.} Simulate one trading day with
+  \texttt{sigma\ =\ 2\ USD/sqrts}, \texttt{kappa\ =\ 1.5},
+  \texttt{A\ =\ 140}. Emit the P\&L distribution of the optimal policy
+  alongside a symmetric, inventory-ignoring baseline.
+\item
+  \textbf{γ sensitivity.} Sweep \texttt{gamma} over three orders of
+  magnitude and emit a CSV of inventory variance and Sharpe
+  vs.~\texttt{gamma}; identify in code the most effective regime.
+\item
+  \textbf{Price impact.} Extend the simulator so the mid reacts linearly
+  to your own fills; run three impact levels and report how each
+  degrades the optimal policy's P\&L (independence-assumption
+  violation).
+\end{enumerate}
+
+\subsection{\texorpdfstring{Problem Set 4 --- Stochastic Optimal Control
+\emph{(Python/PyTorch)}}{Problem Set 4 --- Stochastic Optimal Control (Python/PyTorch)}}\label{problem-set-4-stochastic-optimal-control-pythonpytorch}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Merton CRRA.} Solve the Merton problem under CRRA by
+  discretizing the HJB (value iteration or backward ODE); confirm
+  numerically the optimal portfolio \emph{share} is constant in wealth.
+\item
+  \textbf{Merton CARA.} Repeat under CARA; confirm the optimal
+  \emph{dollar amount} is constant in wealth; emit a side-by-side CSV
+  against problem 1.
+\item
+  \textbf{Almgren--Chriss.} Solve continuous-time optimal execution
+  under quadratic transient impact; verify it matches the discrete-time
+  result in the appropriate limit.
+\item
+  \textbf{HJB-residual verification.} Write a harness that evaluates the
+  HJB residual for the Avellaneda--Stoikov value function (use autograd
+  for the derivatives). Show the residual is \textasciitilde machine
+  zero for the true solution, then perturb it and show the residual
+  diverges.
+\item
+  \textbf{Obstacle problem.} Solve the obstacle problem (projected SOR
+  for the variational inequality) and compare to the unconstrained
+  classical solution, demonstrating where a viscosity treatment is
+  required.
+\end{enumerate}
+
+\subsection{\texorpdfstring{Problem Set 5 --- Avellaneda--Stoikov Engine
+\emph{(Python/PyTorch --- Milestone
+1)}}{Problem Set 5 --- Avellaneda--Stoikov Engine (Python/PyTorch --- Milestone 1)}}\label{problem-set-5-avellanedastoikov-engine-pythonpytorch-milestone-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Vectorized quote path.} Implement the quote computation
+  vectorized over the inventory grid in PyTorch; benchmark it and report
+  the latency distribution (mean, median, p95, p99).
+\item
+  \textbf{Intensity calibration.} Calibrate
+  \texttt{Lambda\^{}+,\ Lambda\^{}-} from one week of Coincall fill data
+  by maximum likelihood (minimize the negative log-likelihood with
+  \texttt{torch.optim}); report fitted \texttt{A}, \texttt{kappa}, and a
+  χ² goodness-of-fit.
+\item
+  \textbf{Paper reproduction.} Reproduce the inventory/P\&L behaviour of
+  Avellaneda--Stoikov (2008) on simulated data; emit the figures as CSV;
+  print a summary of any discrepancies.
+\item
+  \textbf{One-month backtest.} Build the event-driven harness (replay,
+  fill simulator, P\&L attribution) and run a one-month BTC-PERP
+  backtest; report mean/vol of P\&L, Sharpe, max drawdown, mean and std
+  of inventory, vs.~a symmetric baseline.
+\item
+  \textbf{Tests and reproducibility.} Provide a \texttt{pytest} suite
+  over the quote computation and cash/inventory bookkeeping; demonstrate
+  reproducible backtests under a fixed seed.
+\end{enumerate}
+
+\emph{Deliverable: Milestone 1 (see syllabus §2 for acceptance
+criteria).}
+
+\subsection{\texorpdfstring{Problem Set 6 --- Volatility Surface and
+Calibration
+\emph{(Python/PyTorch)}}{Problem Set 6 --- Volatility Surface and Calibration (Python/PyTorch)}}\label{problem-set-6-volatility-surface-and-calibration-pythonpytorch}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{BS Greeks via autograd.} Implement Black--Scholes pricing in
+  PyTorch and obtain delta, gamma, vega, theta, vanna, volga from
+  autograd. Verify vanna/volga against finite differences; report the
+  max relative error across moneyness/maturity.
+\item
+  \textbf{SVI + arbitrage checks.} Implement raw SVI and the
+  Gatheral--Jacquier arbitrage-free constraint checks; apply to a
+  deliberately broken parameterization and have the code report which
+  constraints fail.
+\item
+  \textbf{SVI calibration.} Fit SVI to one Coincall BTC chain snapshot
+  (\texttt{torch.optim}, autograd Jacobians); report parameters,
+  per-strike residuals, and RMS error in vol units.
+\item
+  \textbf{SABR calibration.} Fit SABR to the same snapshot; emit a
+  quantitative comparison against SVI and a printed note on
+  strengths/weaknesses for crypto.
+\item
+  \textbf{Stability study.} Run daily SVI calibration over one month;
+  emit the parameter time series; implement a smoothing scheme (seed
+  each day from the previous fit) and report its effect.
+\end{enumerate}
+
+\subsection{\texorpdfstring{Problem Set 7 --- Fast Computation
+\emph{(C++ with \texttt{pybind11}, called from Python --- Milestone
+2)}}{Problem Set 7 --- Fast Computation (C++ with pybind11, called from Python --- Milestone 2)}}\label{problem-set-7-fast-computation-c-with-pybind11-called-from-python-milestone-2}
+
+A \texttt{CMakeLists.txt} and \texttt{pybind11} scaffold are provided.
+Build the module
+(\texttt{cmake\ -B\ build\ \&\&\ cmake\ -\/-build\ build}) and import it
+from Python as \texttt{fastmm}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{COS / Carr--Madan pricer (C++).} Implement the Fang--Oosterlee
+  COS pricer and the Carr--Madan FFT pricer for Heston European calls in
+  C++ (use the provided FFT dependency). Bind both to Python. Verify
+  against a PyTorch Monte Carlo benchmark and report COS convergence
+  vs.~\texttt{N}.
+\item
+  \textbf{Robust implied volatility (C++).} Implement an implied-vol
+  inversion with a rational initial guess and a safeguarded
+  Newton/Halley step; bind it. Show convergence across the surface,
+  including deep wings and short expiries.
+\item
+  \textbf{Greeks, validated by autograd.} Expose prices from C++ and
+  compute the Greek vector. Validate every Greek against a
+  \textbf{PyTorch-autograd} reference implementation of the same pricer;
+  report max relative error. (Do \textbf{not} hand-code adjoint AD in
+  C++ --- autograd is the reference.)
+\item
+  \textbf{Vectorized surface revaluation (C++).} Revalue the full
+  Coincall BTC surface (300--500 contracts) with the Greek vector;
+  release the GIL around the C++ loop; report per-option latency (mean,
+  median, p95, p99) and the full-surface time (target \textless{} 5 ms).
+\item
+  \textbf{The binder, explained.} In a short \texttt{BINDING.md},
+  explain your \texttt{pybind11} module to a student new to it: how
+  tensors cross the boundary without copying (buffer protocol /
+  \texttt{py::array\_t}), why and where you release the GIL, and how the
+  CMake build finds Python and \texttt{pybind11}.
+\end{enumerate}
+
+\emph{Deliverable: Milestone 2 (see syllabus §2 for acceptance
+criteria).}
+
+\subsection{\texorpdfstring{Problem Set 8 --- Options Market Making and
+Hedging
+\emph{(Python/PyTorch)}}{Problem Set 8 --- Options Market Making and Hedging (Python/PyTorch)}}\label{problem-set-8-options-market-making-and-hedging-pythonpytorch}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Multi-Greek inventory.} Implement inventory aggregation and
+  the inventory dynamics under fills with a vector
+  \texttt{q\ \ in\ \ R\^{}k}; unit-test the jump structure a fill
+  induces.
+\item
+  \textbf{El Aoud--Abergel solver.} Solve the reduced multi-Greek
+  problem under a quadratic penalty in PyTorch; verify in code it
+  collapses to the Avellaneda--Stoikov quotes when one Greek and one
+  option are tracked.
+\item
+  \textbf{Penalty-matrix calibration.} Calibrate the quadratic penalty
+  matrix from the empirical covariance of delta/gamma/vega over one week
+  of Coincall data; emit the matrix with each entry justified by the
+  data.
+\item
+  \textbf{Gamma--theta--variance identity.} Simulate a continuously
+  delta-hedged short call (autograd for the hedge ratio) and verify
+  numerically the P\&L equals
+  \texttt{integral\ \ 0.5*Gamma*(realized\ -\ implied\ variance)}.
+\item
+  \textbf{Threshold hedger + engine.} Implement a delta-hedger
+  triggering when
+  \texttt{\textbar{}Delta\textbar{}\ \textgreater{}\ 0.1\ BTC},
+  integrate it with the Week-5 engine on one week of data, and report
+  hedging cost, risk reduction, and the quoting/hedging interaction.
+\end{enumerate}
+
+\subsection{\texorpdfstring{Problem Set 9 --- Backtesting, Risk, and
+Taker Flow \emph{(Python/PyTorch --- Milestone
+3)}}{Problem Set 9 --- Backtesting, Risk, and Taker Flow (Python/PyTorch --- Milestone 3)}}\label{problem-set-9-backtesting-risk-and-taker-flow-pythonpytorch-milestone-3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Event-driven backtest.} Implement the harness with
+  deterministic replay; validate by running an identical config twice
+  for bitwise results.
+\item
+  \textbf{Fill simulator.} Model fill probability as a function of quote
+  distance and opposite-side depth; calibrate on a training month and
+  validate on a disjoint holdout.
+\item
+  \textbf{Full backtest.} Run the multi-Greek engine on Coincall BTC
+  options; report mean/std daily P\&L, Sharpe (with block-bootstrap CI),
+  max drawdown, and aggregated-Greek time series.
+\item
+  \textbf{P\&L attribution.} Decompose daily P\&L into spread,
+  inventory, gamma, and hedging; emit a CSV for a stacked-area plot;
+  assert the streams sum to total P\&L.
+\item
+  \textbf{Drawdown forensic + taker analysis.} Identify the
+  worst-drawdown day, report the environment, the positions that drove
+  the loss, and a counterfactual. Using the guest lecture, characterize
+  the taker flow on that day and how it affected your fills.
+\end{enumerate}
+
+\emph{Deliverable: Milestone 3 (see syllabus §2 for acceptance
+criteria).}
+
+\subsection{\texorpdfstring{Problem Set 10 --- Advanced Extension and
+Final Report
+\emph{(Python/PyTorch)}}{Problem Set 10 --- Advanced Extension and Final Report (Python/PyTorch)}}\label{problem-set-10-advanced-extension-and-final-report-pythonpytorch}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Proposal.} Submit a one-page proposal (problem, method,
+  expected results, risks) for your chosen advanced Avellaneda--Stoikov
+  extension by end of day one.
+\item
+  \textbf{Implementation.} Implement the extension in PyTorch on top of
+  the milestone infrastructure (multi-asset, adverse-selection,
+  signal-driven, discrete-inventory, or robust).
+\item
+  \textbf{Evaluation.} Quantify the improvement (or not) over the Week-9
+  baseline using the same risk and P\&L metrics, over the same window.
+\item
+  \textbf{Final report.} ≤ 30 pages, following the lecture's structure,
+  incorporating all milestone work.
+\item
+  \textbf{Final presentation.} Twenty minutes to the cohort and invited
+  industry guests.
+\end{enumerate}
+
+\end{document}

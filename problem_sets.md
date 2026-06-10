@@ -50,7 +50,7 @@ after each deadline.
    a CSV of mid-price and quoted spread over time. Remember to remove
    price levels that become empty after a cancel.
 2. **Roll estimator.** Compute the Roll effective-spread estimator
-   `2·sqrt(−cov(Δp_t, Δp_{t−1}))` on the same sample and compare it to the
+   `2*sqrt(-cov(Deltap_t, Deltap_{t-1}))` on the same sample and compare it to the
    directly observed bid-ask spread. Print both and their discrepancy.
 3. **Glosten–Milgrom quote-setter.** Implement the rational quote-setter
    as a PyTorch belief update: given an informed-trade probability and a
@@ -67,17 +67,17 @@ after each deadline.
 ## Problem Set 3 — The Avellaneda–Stoikov Model *(Python/PyTorch)*
 
 1. **Reduced ODE solver.** Implement a PyTorch backward integrator for the
-   reduced system in `θ(t, q)` arising from the ansatz
-   `V = −exp(−γ(x+qS))·θ(t,q)`. Emit `θ` on a `(t, q)` grid.
+   reduced system in `theta(t, q)` arising from the ansatz
+   `V = -exp(-gamma(x+qS))*theta(t,q)`. Emit `theta` on a `(t, q)` grid.
 2. **Closed-form quotes.** Implement the asymptotic reservation price
-   `r = S − qγσ²(T−t)` and half-spread
-   `δ = (1/γ)·ln(1+γ/κ) + (γσ²/2)(T−t)` as a reusable function, and
+   `r = S - qgammasigma^2(T-t)` and half-spread
+   `delta = (1/gamma)*ln(1+gamma/kappa) + (gammasigma^2/2)(T-t)` as a reusable function, and
    `pytest` it against the solver from problem 1 where they should agree.
 3. **Quote engine + simulation.** Simulate one trading day with
-   `σ = 2 USD/√s`, `κ = 1.5`, `A = 140`. Emit the P&L distribution of the
+   `sigma = 2 USD/sqrts`, `kappa = 1.5`, `A = 140`. Emit the P&L distribution of the
    optimal policy alongside a symmetric, inventory-ignoring baseline.
-4. **γ sensitivity.** Sweep `γ` over three orders of magnitude and emit a
-   CSV of inventory variance and Sharpe vs. `γ`; identify in code the most
+4. **γ sensitivity.** Sweep `gamma` over three orders of magnitude and emit a
+   CSV of inventory variance and Sharpe vs. `gamma`; identify in code the most
    effective regime.
 5. **Price impact.** Extend the simulator so the mid reacts linearly to
    your own fills; run three impact levels and report how each degrades the
@@ -106,9 +106,9 @@ after each deadline.
 1. **Vectorized quote path.** Implement the quote computation vectorized
    over the inventory grid in PyTorch; benchmark it and report the latency
    distribution (mean, median, p95, p99).
-2. **Intensity calibration.** Calibrate `Λ⁺, Λ⁻` from one week of Coincall
+2. **Intensity calibration.** Calibrate `Lambda^+, Lambda^-` from one week of Coincall
    fill data by maximum likelihood (minimize the negative log-likelihood
-   with `torch.optim`); report fitted `A`, `κ`, and a χ² goodness-of-fit.
+   with `torch.optim`); report fitted `A`, `kappa`, and a χ² goodness-of-fit.
 3. **Paper reproduction.** Reproduce the inventory/P&L behaviour of
    Avellaneda–Stoikov (2008) on simulated data; emit the figures as CSV;
    print a summary of any discrepancies.
@@ -173,7 +173,7 @@ A `CMakeLists.txt` and `pybind11` scaffold are provided. Build the module
 ## Problem Set 8 — Options Market Making and Hedging *(Python/PyTorch)*
 
 1. **Multi-Greek inventory.** Implement inventory aggregation and the
-   inventory dynamics under fills with a vector `q ∈ ℝᵏ`; unit-test the
+   inventory dynamics under fills with a vector `q  in  R^k`; unit-test the
    jump structure a fill induces.
 2. **El Aoud–Abergel solver.** Solve the reduced multi-Greek problem under
    a quadratic penalty in PyTorch; verify in code it collapses to the
@@ -183,9 +183,9 @@ A `CMakeLists.txt` and `pybind11` scaffold are provided. Build the module
    Coincall data; emit the matrix with each entry justified by the data.
 4. **Gamma–theta–variance identity.** Simulate a continuously
    delta-hedged short call (autograd for the hedge ratio) and verify
-   numerically the P&L equals `∫ ½·Γ·(realized − implied variance)`.
+   numerically the P&L equals `integral  0.5*Gamma*(realized - implied variance)`.
 5. **Threshold hedger + engine.** Implement a delta-hedger triggering when
-   `|Δ| > 0.1 BTC`, integrate it with the Week-5 engine on one week of
+   `|Delta| > 0.1 BTC`, integrate it with the Week-5 engine on one week of
    data, and report hedging cost, risk reduction, and the quoting/hedging
    interaction.
 

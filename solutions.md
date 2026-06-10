@@ -56,7 +56,7 @@ run (≤ 3 for design).
 it strips adverse-selection/impact. *Errors:* sign convention on the
 covariance (−3); noting the discrepancy without engaging (−3).
 
-**2.3 Glosten–Milgrom quote-setter (10 pts).** With informed fraction `μ`
+**2.3 Glosten–Milgrom quote-setter (10 pts).** With informed fraction `mu`
 and value prior, bid/ask are posterior expectations given the trade
 direction. Bayesian update of the value distribution after a buy/sell; the
 spread is endogenous from the indifference condition. *Errors:* skipping
@@ -76,7 +76,7 @@ discussion ignoring the actual numbers (−3).
 ## Problem Set 3 — The Avellaneda–Stoikov Model
 
 **3.1 Reduced ODE solver (12 pts).** Backward Euler on
-`θ'(t,q) = (α q² − …)·θ + intensity coupling`; emit `θ` on the grid.
+`theta'(t,q) = (alpha q^2 - ...)*theta + intensity coupling`; emit `theta` on the grid.
 *Errors:* wrong terminal condition (−3); algebra in the coupling (−2 ea).
 
 **3.2 Closed-form quotes (10 pts).**
@@ -89,7 +89,7 @@ def as_quotes(S, q, gamma, sigma, kappa, tau):
     return r - spread, r + spread                # bid, ask
 ```
 
-Validate against 3.1 in the large-`τ` regime. *Errors:* wrong limit (−2);
+Validate against 3.1 in the large-`tau` regime. *Errors:* wrong limit (−2);
 algebra in the half-spread (−3).
 
 **3.3 Quote engine + simulation (12 pts).** Optimal policy mean-reverts
@@ -98,7 +98,7 @@ lower variance. *Errors:* baseline not actually symmetric (−3); comparing
 the wrong distributions (−3); does not run (≤ 4).
 
 **3.4 γ sensitivity (10 pts).** Inventory variance decreases and Sharpe
-peaks at intermediate `γ`. **Use a log x-axis.** *Errors:* single `γ` (−5);
+peaks at intermediate `gamma`. **Use a log x-axis.** *Errors:* single `gamma` (−5);
 linear axis (−2).
 
 **3.5 Price impact (8 pts).** P&L degrades monotonically with impact.
@@ -109,7 +109,7 @@ strategy (−3).
 
 ## Problem Set 4 — Stochastic Optimal Control
 
-**4.1 Merton CRRA (12 pts).** Portfolio share `π* = (μ−r)/(γσ²)` constant
+**4.1 Merton CRRA (12 pts).** Portfolio share `pi* = (mu-r)/(gammasigma^2)` constant
 in wealth; consumption proportional to wealth. *Errors:* wrong ansatz
 (−4); missing transversality (−3).
 
@@ -150,7 +150,7 @@ for _ in range(2000):
     opt.zero_grad(); nll.backward(); opt.step()
 ```
 
-Report `A`, `κ`, χ². *Errors:* OLS instead of MLE (−4); no goodness-of-fit
+Report `A`, `kappa`, χ². *Errors:* OLS instead of MLE (−4); no goodness-of-fit
 (−3).
 
 **5.3 Paper reproduction (10 pts).** Inventory oscillates around zero;
@@ -179,15 +179,15 @@ def bs_call(S, K, T, r, sig):
 S,K,T,r,sig = (torch.tensor(x, requires_grad=True) for x in (100.,100.,1.,0.,0.2))
 price = bs_call(S,K,T,r,sig)
 vega, = torch.autograd.grad(price, sig, create_graph=True)
-vanna, = torch.autograd.grad(vega, S, create_graph=True)   # ∂vega/∂S
-volga, = torch.autograd.grad(vega, sig)                    # ∂vega/∂σ
+vanna, = torch.autograd.grad(vega, S, create_graph=True)   # dvega/dS
+volga, = torch.autograd.grad(vega, sig)                    # dvega/dsigma
 ```
 
 Verify vanna/volga vs. finite differences. *Errors:* algebra/setup error
 (−2 ea); no numerical check (−3).
 
 **6.2 SVI + arbitrage checks (10 pts).** Implement raw SVI total variance
-`w(k)=a+b(ρ(k−m)+sqrt((k−m)²+ς²))`; check butterfly (`g(k)≥0`) and calendar
+`w(k)=a+b(rho(k-m)+sqrt((k-m)^2+s^2))`; check butterfly (`g(k)>=0`) and calendar
 (monotone total variance) constraints; show which fail on a broken set.
 *Errors:* no constraint checks (−4); not demonstrating violations (−3).
 
@@ -196,7 +196,7 @@ autograd Jacobians; report params, per-strike residuals, RMS vol error.
 *Errors:* only RMS, no per-strike residuals (−3); optimizer not converged
 and unnoticed (−3).
 
-**6.4 SABR calibration (10 pts).** Fit `α, β, ρ, ν` via the Hagan implied
+**6.4 SABR calibration (10 pts).** Fit `alpha, beta, rho, nu` via the Hagan implied
 vol; compare to SVI. *Errors:* comparison not engaging strengths/weaknesses
 (−3); no convergence (−3).
 
@@ -209,7 +209,7 @@ ineffective smoothing (−3).
 ## Problem Set 7 — Fast Computation (C++ via `pybind11`, Milestone 2)
 
 **7.1 COS / Carr–Madan pricer (C++) (10 pts).** COS:
-`price ≈ Σ_k Re(φ(u_k)·exp(−i u_k a))·V_k` with `u_k = kπ/(b−a)`,
+`price ~= Sigma_k Re(phi(u_k)*exp(-i u_k a))*V_k` with `u_k = kpi/(b-a)`,
 truncation `[a,b]` from the cumulants. Bind with `pybind11`:
 
 ```cpp
@@ -256,20 +256,20 @@ option's Greek vector. Unit-test the jump. *Errors:* missing the
 multi-contract structure (−3); wrong aggregation (−3).
 
 **8.2 El Aoud–Abergel solver (15 pts).** Reduced problem on the inventory
-vector with quadratic penalty `½ qᵀ Σ q`; verify collapse to
+vector with quadratic penalty `0.5 q^T Sigma q`; verify collapse to
 Avellaneda–Stoikov in 1-D. *Errors:* skipping the 1-D reduction check (−4);
 multi-dimensional algebra errors (−3 ea).
 
-**8.3 Penalty-matrix calibration (10 pts).** `Σ` from the empirical Greek
+**8.3 Penalty-matrix calibration (10 pts).** `Sigma` from the empirical Greek
 covariance; justify each entry from data. *Errors:* identity matrix (−4);
 entries not justified (−4).
 
 **8.4 Gamma–theta–variance identity (10 pts).** Hedged short-call P&L
-`= ∫ ½ Γ_t (σ²_real − σ²_impl) S_t² dt`. Verify numerically. *Errors:* sign
+`= integral  0.5 Gamma_t (sigma^2_real - sigma^2_impl) S_t^2 dt`. Verify numerically. *Errors:* sign
 on theta (−2); missing the ½ factor (−2); not isolating the
 realized-vs-implied term (−3).
 
-**8.5 Threshold hedger + engine (10 pts).** Hedge when `|Δ|>0.1 BTC`;
+**8.5 Threshold hedger + engine (10 pts).** Hedge when `|Delta|>0.1 BTC`;
 integrate with the Week-5 engine; report cost and risk reduction. *Errors:*
 not integrated with the engine (−4); cost without risk reduction (−3).
 

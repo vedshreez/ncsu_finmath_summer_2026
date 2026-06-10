@@ -1,0 +1,547 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% ---------------------------------------------------------------------------
+% Unicode -> LaTeX mappings so these documents compile and render correctly
+% under xelatex (and pdflatex) without depending on a particular system font.
+% Every non-ASCII glyph used in the course text is mapped explicitly; this is
+% needed because the documents use mathematical symbols inside running text
+% and inside inline-code spans, where unicode-math would otherwise treat them
+% as math-only and abort.
+% ---------------------------------------------------------------------------
+\usepackage{amssymb}
+\usepackage{newunicodechar}
+
+% --- Greek (lower case) ---
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ν}{\ensuremath{\nu}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{ς}{\ensuremath{\varsigma}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+% --- Greek (capitals) ---
+\newunicodechar{Γ}{\ensuremath{\Gamma}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+
+% --- Math symbols ---
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}}
+\newunicodechar{∂}{\ensuremath{\partial}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{∫}{\ensuremath{\int}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{½}{\textonehalf}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{⟶}{\ensuremath{\longrightarrow}}
+
+% --- Superscripts / modifier letters ---
+\newunicodechar{²}{\ensuremath{^{2}}}
+\newunicodechar{³}{\ensuremath{^{3}}}
+\newunicodechar{⁺}{\ensuremath{^{+}}}
+\newunicodechar{⁻}{\ensuremath{^{-}}}
+\newunicodechar{ᵀ}{\ensuremath{^{\mathsf{T}}}}
+\newunicodechar{ᵏ}{\ensuremath{^{k}}}
+
+% --- Punctuation / misc text symbols ---
+\newunicodechar{…}{\textellipsis}
+\newunicodechar{§}{\S}
+\newunicodechar{⚑}{\textbf{[!]}}
+
+% --- Accented Latin (author names) ---
+\newunicodechar{Á}{\'A}
+\newunicodechar{Ø}{\O}
+\newunicodechar{ä}{\"a}
+\newunicodechar{é}{\'e}
+\newunicodechar{ó}{\'o}
+\newunicodechar{ô}{\^o}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Problem Set Solutions},
+  pdfauthor={North Carolina State University · Financial Mathematics},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Problem Set Solutions}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Optimal Market Making for Cryptocurrency Options --- The
+Avellaneda--Stoikov Framework and its Extension to Options}
+\author{North Carolina State University · Financial Mathematics}
+\date{Summer 2026}
+
+\begin{document}
+\maketitle
+
+\includegraphics[width=2.6in,height=\textheight,keepaspectratio]{assets/ncsu_logo.png}
+
+\section{Problem Set Solutions}\label{problem-set-solutions}
+
+\textbf{Optimal Market Making for Cryptocurrency Options}
+
+\emph{The Avellaneda--Stoikov Framework and its Extension to Options}
+
+North Carolina State University --- Summer 2026
+
+\begin{quote}
+\textbf{Confidential --- for graders, and for students after each
+deadline.} Solutions show one correct approach with a code sketch, the
+expected result, and grading notes. Students may reach the same result
+by other means; grade on correctness, reproducibility, and code quality.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 2 --- Foundations of Market
+Microstructure}\label{problem-set-2-foundations-of-market-microstructure}
+
+\textbf{2.1 Order-book reconstruction (10 pts).} Maintain two price→size
+maps. On \texttt{new}, add size; on \texttt{cancel}, subtract and
+\textbf{delete the level if it reaches zero}; on \texttt{modify},
+replace; on \texttt{trade}, decrement the resting side that was hit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sortedcontainers }\ImportTok{import}\NormalTok{ SortedDict}
+\KeywordTok{class}\NormalTok{ L2Book:}
+    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{): }\VariableTok{self}\NormalTok{.bids, }\VariableTok{self}\NormalTok{.asks }\OperatorTok{=}\NormalTok{ SortedDict(), SortedDict()}
+    \KeywordTok{def}\NormalTok{ \_side(}\VariableTok{self}\NormalTok{, s): }\ControlFlowTok{return} \VariableTok{self}\NormalTok{.bids }\ControlFlowTok{if}\NormalTok{ s }\OperatorTok{==} \StringTok{"bid"} \ControlFlowTok{else} \VariableTok{self}\NormalTok{.asks}
+    \KeywordTok{def} \BuiltInTok{apply}\NormalTok{(}\VariableTok{self}\NormalTok{, e):}
+\NormalTok{        bk }\OperatorTok{=} \VariableTok{self}\NormalTok{.\_side(e[}\StringTok{"side"}\NormalTok{])}
+        \ControlFlowTok{if}\NormalTok{ e[}\StringTok{"type"}\NormalTok{] }\KeywordTok{in}\NormalTok{ (}\StringTok{"new"}\NormalTok{, }\StringTok{"modify"}\NormalTok{): bk[e[}\StringTok{"px"}\NormalTok{]] }\OperatorTok{=}\NormalTok{ e[}\StringTok{"sz"}\NormalTok{]}
+        \ControlFlowTok{elif}\NormalTok{ e[}\StringTok{"type"}\NormalTok{] }\OperatorTok{==} \StringTok{"cancel"}\NormalTok{:}
+\NormalTok{            bk[e[}\StringTok{"px"}\NormalTok{]] }\OperatorTok{=}\NormalTok{ bk.get(e[}\StringTok{"px"}\NormalTok{], }\DecValTok{0}\NormalTok{) }\OperatorTok{{-}}\NormalTok{ e[}\StringTok{"sz"}\NormalTok{]}
+            \ControlFlowTok{if}\NormalTok{ bk[e[}\StringTok{"px"}\NormalTok{]] }\OperatorTok{\textless{}=} \DecValTok{0}\NormalTok{: bk.pop(e[}\StringTok{"px"}\NormalTok{], }\VariableTok{None}\NormalTok{)}
+        \ControlFlowTok{elif}\NormalTok{ e[}\StringTok{"type"}\NormalTok{] }\OperatorTok{==} \StringTok{"trade"}\NormalTok{:}
+\NormalTok{            bk[e[}\StringTok{"px"}\NormalTok{]] }\OperatorTok{=}\NormalTok{ bk.get(e[}\StringTok{"px"}\NormalTok{], }\DecValTok{0}\NormalTok{) }\OperatorTok{{-}}\NormalTok{ e[}\StringTok{"sz"}\NormalTok{]}
+            \ControlFlowTok{if}\NormalTok{ bk[e[}\StringTok{"px"}\NormalTok{]] }\OperatorTok{\textless{}=} \DecValTok{0}\NormalTok{: bk.pop(e[}\StringTok{"px"}\NormalTok{], }\VariableTok{None}\NormalTok{)}
+    \KeywordTok{def}\NormalTok{ mid(}\VariableTok{self}\NormalTok{):}
+        \ControlFlowTok{return} \FloatTok{0.5}\OperatorTok{*}\NormalTok{(}\VariableTok{self}\NormalTok{.bids.peekitem(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{)[}\DecValTok{0}\NormalTok{] }\OperatorTok{+} \VariableTok{self}\NormalTok{.asks.peekitem(}\DecValTok{0}\NormalTok{)[}\DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Expected:} a clean mid/spread CSV. \emph{Common errors:} not
+deleting empty levels (−2); decrementing the wrong side on a trade (−3);
+code does not run (≤ 3 for design).
+
+\textbf{2.2 Roll estimator (8 pts).}
+\texttt{spread\ =\ 2·sqrt(max(0,\ −cov(Δp\_t,\ Δp\_\{t−1\})))}. It is
+typically \textbf{smaller} than the quoted spread because it strips
+adverse-selection/impact. \emph{Errors:} sign convention on the
+covariance (−3); noting the discrepancy without engaging (−3).
+
+\textbf{2.3 Glosten--Milgrom quote-setter (10 pts).} With informed
+fraction \texttt{mu} and value prior, bid/ask are posterior expectations
+given the trade direction. Bayesian update of the value distribution
+after a buy/sell; the spread is endogenous from the indifference
+condition. \emph{Errors:} skipping the Bayes update (−3); bid/ask
+swapped (−2); not acknowledging endogeneity (−2).
+
+\textbf{2.4 GM simulation (8 pts).} Average many runs; belief converges
+to true value. \emph{Errors:} one realization, not averaged (−2);
+non-rational prior (−2).
+
+\textbf{2.5 Toxicity (9 pts).} Realized spread uses a future mid; price
+impact is the signed mid move. \emph{Errors:} wrong trade-direction sign
+(−3); discussion ignoring the actual numbers (−3).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 3 --- The Avellaneda--Stoikov
+Model}\label{problem-set-3-the-avellanedastoikov-model}
+
+\textbf{3.1 Reduced ODE solver (12 pts).} Backward Euler on
+\texttt{theta\textquotesingle{}(t,q)\ =\ (alpha\ q\^{}2\ -\ ...)*theta\ +\ intensity\ coupling};
+emit \texttt{theta} on the grid. \emph{Errors:} wrong terminal condition
+(−3); algebra in the coupling (−2 ea).
+
+\textbf{3.2 Closed-form quotes (10 pts).}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ torch}
+\KeywordTok{def}\NormalTok{ as\_quotes(S, q, gamma, sigma, kappa, tau):}
+\NormalTok{    r }\OperatorTok{=}\NormalTok{ S }\OperatorTok{{-}}\NormalTok{ q}\OperatorTok{*}\NormalTok{gamma}\OperatorTok{*}\NormalTok{sigma}\OperatorTok{**}\DecValTok{2}\OperatorTok{*}\NormalTok{tau                 }\CommentTok{\# reservation price}
+\NormalTok{    spread }\OperatorTok{=}\NormalTok{ (}\DecValTok{1}\OperatorTok{/}\NormalTok{gamma)}\OperatorTok{*}\NormalTok{torch.log1p(gamma}\OperatorTok{/}\NormalTok{kappa) }\OperatorTok{+} \FloatTok{0.5}\OperatorTok{*}\NormalTok{gamma}\OperatorTok{*}\NormalTok{sigma}\OperatorTok{**}\DecValTok{2}\OperatorTok{*}\NormalTok{tau}
+    \ControlFlowTok{return}\NormalTok{ r }\OperatorTok{{-}}\NormalTok{ spread, r }\OperatorTok{+}\NormalTok{ spread                }\CommentTok{\# bid, ask}
+\end{Highlighting}
+\end{Shaded}
+
+Validate against 3.1 in the large-\texttt{tau} regime. \emph{Errors:}
+wrong limit (−2); algebra in the half-spread (−3).
+
+\textbf{3.3 Quote engine + simulation (12 pts).} Optimal policy
+mean-reverts inventory; symmetric baseline does not. The optimal P\&L
+distribution has lower variance. \emph{Errors:} baseline not actually
+symmetric (−3); comparing the wrong distributions (−3); does not run (≤
+4).
+
+\textbf{3.4 γ sensitivity (10 pts).} Inventory variance decreases and
+Sharpe peaks at intermediate \texttt{gamma}. \textbf{Use a log x-axis.}
+\emph{Errors:} single \texttt{gamma} (−5); linear axis (−2).
+
+\textbf{3.5 Price impact (8 pts).} P\&L degrades monotonically with
+impact. \emph{Errors:} listing effects without quantifying (−3); no
+consequence for the strategy (−3).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 4 --- Stochastic Optimal
+Control}\label{problem-set-4-stochastic-optimal-control}
+
+\textbf{4.1 Merton CRRA (12 pts).} Portfolio share
+\texttt{pi*\ =\ (mu-r)/(gammasigma\^{}2)} constant in wealth;
+consumption proportional to wealth. \emph{Errors:} wrong ansatz (−4);
+missing transversality (−3).
+
+\textbf{4.2 Merton CARA (10 pts).} Dollar amount constant in wealth.
+Emit side-by-side CSV. \emph{Errors:} failing to articulate the
+structural difference (−2).
+
+\textbf{4.3 Almgren--Chriss (12 pts).} Optimal trajectory solves a
+linear ODE; hyperbolic-sinh shape; matches the discrete result.
+\emph{Errors:} skipping the variational step (−4); wrong boundary
+conditions (−3).
+
+\textbf{4.4 HJB-residual verification (10 pts).} Residual
+\textasciitilde1e-10 for the true value function; diverges under
+perturbation. Use \texttt{torch.autograd.grad} for the partials.
+\emph{Errors:} a ``counterexample'' that does not actually break the
+theorem (−3).
+
+\textbf{4.5 Obstacle problem (6 pts).} Projected SOR; solution touches
+the obstacle in the contact set, matching classical theory elsewhere.
+\emph{Errors:} missing the obstacle/contact set entirely (−3).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 5 --- Avellaneda--Stoikov Engine (Milestone
+1)}\label{problem-set-5-avellanedastoikov-engine-milestone-1}
+
+\textbf{5.1 Vectorized quote path (12 pts).} Vectorize over the
+inventory grid; no Python loop. Report the latency distribution.
+\emph{Errors:} Python grid loop (−3); reporting only the mean (−2).
+
+\textbf{5.2 Intensity calibration (12 pts).} Minimize the negative
+log-likelihood of the exponential-intensity fill model with
+\texttt{torch.optim}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{=}\NormalTok{ torch.tensor(}\FloatTok{1.0}\NormalTok{, requires\_grad}\OperatorTok{=}\VariableTok{True}\NormalTok{)}\OperatorTok{;}\NormalTok{ kap }\OperatorTok{=}\NormalTok{ torch.tensor(}\FloatTok{1.0}\NormalTok{, requires\_grad}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{opt }\OperatorTok{=}\NormalTok{ torch.optim.Adam([A, kap], lr}\OperatorTok{=}\FloatTok{0.05}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ \_ }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{2000}\NormalTok{):}
+\NormalTok{    lam }\OperatorTok{=}\NormalTok{ A}\OperatorTok{*}\NormalTok{torch.exp(}\OperatorTok{{-}}\NormalTok{kap}\OperatorTok{*}\NormalTok{delta)           }\CommentTok{\# delta = quote distance of fills}
+\NormalTok{    nll }\OperatorTok{=} \OperatorTok{{-}}\NormalTok{(torch.log(lam) }\OperatorTok{{-}}\NormalTok{ lam}\OperatorTok{*}\NormalTok{dt).}\BuiltInTok{sum}\NormalTok{()  }\CommentTok{\# Poisson log{-}likelihood}
+\NormalTok{    opt.zero\_grad()}\OperatorTok{;}\NormalTok{ nll.backward()}\OperatorTok{;}\NormalTok{ opt.step()}
+\end{Highlighting}
+\end{Shaded}
+
+Report \texttt{A}, \texttt{kappa}, χ². \emph{Errors:} OLS instead of MLE
+(−4); no goodness-of-fit (−3).
+
+\textbf{5.3 Paper reproduction (10 pts).} Inventory oscillates around
+zero; P\&L distribution matches the paper's shape. \emph{Errors:} no
+commentary (−4).
+
+\textbf{5.4 One-month backtest (12 pts).} Report all metrics vs.~the
+symmetric baseline, with time-series plots. \emph{Errors:} missing
+baseline (−4); missing a metric (−2 ea); no time series (−2).
+
+\textbf{5.5 Tests + reproducibility (4 pts).} \texttt{pytest} over
+quote/bookkeeping; fixed-seed reproducibility. \emph{Errors:} seed not
+set (−3).
+
+\emph{Milestone 1 rubric: see Handbook Part III §3.1.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 6 --- Volatility Surface and
+Calibration}\label{problem-set-6-volatility-surface-and-calibration}
+
+\textbf{6.1 BS Greeks via autograd (10 pts).}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ bs\_call(S, K, T, r, sig):}
+\NormalTok{    d1 }\OperatorTok{=}\NormalTok{ (torch.log(S}\OperatorTok{/}\NormalTok{K) }\OperatorTok{+}\NormalTok{ (r}\OperatorTok{+}\FloatTok{0.5}\OperatorTok{*}\NormalTok{sig}\OperatorTok{**}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{T)}\OperatorTok{/}\NormalTok{(sig}\OperatorTok{*}\NormalTok{torch.sqrt(T))}\OperatorTok{;}\NormalTok{ d2 }\OperatorTok{=}\NormalTok{ d1 }\OperatorTok{{-}}\NormalTok{ sig}\OperatorTok{*}\NormalTok{torch.sqrt(T)}
+\NormalTok{    N }\OperatorTok{=}\NormalTok{ torch.distributions.Normal(}\FloatTok{0.}\NormalTok{,}\FloatTok{1.}\NormalTok{).cdf}
+    \ControlFlowTok{return}\NormalTok{ S}\OperatorTok{*}\NormalTok{N(d1) }\OperatorTok{{-}}\NormalTok{ K}\OperatorTok{*}\NormalTok{torch.exp(}\OperatorTok{{-}}\NormalTok{r}\OperatorTok{*}\NormalTok{T)}\OperatorTok{*}\NormalTok{N(d2)}
+\NormalTok{S,K,T,r,sig }\OperatorTok{=}\NormalTok{ (torch.tensor(x, requires\_grad}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ (}\FloatTok{100.}\NormalTok{,}\FloatTok{100.}\NormalTok{,}\FloatTok{1.}\NormalTok{,}\FloatTok{0.}\NormalTok{,}\FloatTok{0.2}\NormalTok{))}
+\NormalTok{price }\OperatorTok{=}\NormalTok{ bs\_call(S,K,T,r,sig)}
+\NormalTok{vega, }\OperatorTok{=}\NormalTok{ torch.autograd.grad(price, sig, create\_graph}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{vanna, }\OperatorTok{=}\NormalTok{ torch.autograd.grad(vega, S, create\_graph}\OperatorTok{=}\VariableTok{True}\NormalTok{)   }\CommentTok{\# dvega/dS}
+\NormalTok{volga, }\OperatorTok{=}\NormalTok{ torch.autograd.grad(vega, sig)                    }\CommentTok{\# dvega/dsigma}
+\end{Highlighting}
+\end{Shaded}
+
+Verify vanna/volga vs.~finite differences. \emph{Errors:} algebra/setup
+error (−2 ea); no numerical check (−3).
+
+\textbf{6.2 SVI + arbitrage checks (10 pts).} Implement raw SVI total
+variance \texttt{w(k)=a+b(rho(k-m)+sqrt((k-m)\^{}2+s\^{}2))}; check
+butterfly (\texttt{g(k)\textgreater{}=0}) and calendar (monotone total
+variance) constraints; show which fail on a broken set. \emph{Errors:}
+no constraint checks (−4); not demonstrating violations (−3).
+
+\textbf{6.3 SVI calibration (10 pts).} \texttt{torch.optim} on the SVI
+params, autograd Jacobians; report params, per-strike residuals, RMS vol
+error. \emph{Errors:} only RMS, no per-strike residuals (−3); optimizer
+not converged and unnoticed (−3).
+
+\textbf{6.4 SABR calibration (10 pts).} Fit
+\texttt{alpha,\ beta,\ rho,\ nu} via the Hagan implied vol; compare to
+SVI. \emph{Errors:} comparison not engaging strengths/weaknesses (−3);
+no convergence (−3).
+
+\textbf{6.5 Stability study (10 pts).} Parameter time series; seeding
+from the prior day stabilizes the fit. \emph{Errors:} no stability
+comment (−3); ineffective smoothing (−3).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{\texorpdfstring{Problem Set 7 --- Fast Computation (C++ via
+\texttt{pybind11}, Milestone
+2)}{Problem Set 7 --- Fast Computation (C++ via pybind11, Milestone 2)}}\label{problem-set-7-fast-computation-c-via-pybind11-milestone-2}
+
+\textbf{7.1 COS / Carr--Madan pricer (C++) (10 pts).} COS:
+\texttt{price\ \textasciitilde{}=\ Sigma\_k\ Re(phi(u\_k)*exp(-i\ u\_k\ a))*V\_k}
+with \texttt{u\_k\ =\ kpi/(b-a)}, truncation \texttt{{[}a,b{]}} from the
+cumulants. Bind with \texttt{pybind11}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{\textless{}pybind11/pybind11.h\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}pybind11/numpy.h\textgreater{}}
+\KeywordTok{namespace}\NormalTok{ py }\OperatorTok{=}\NormalTok{ pybind11}\OperatorTok{;}
+\DataTypeTok{double}\NormalTok{ cos\_price}\OperatorTok{(}\DataTypeTok{double}\NormalTok{ S}\OperatorTok{,}\DataTypeTok{double}\NormalTok{ K}\OperatorTok{,}\DataTypeTok{double}\NormalTok{ T}\OperatorTok{,}\DataTypeTok{double}\NormalTok{ r}\OperatorTok{,}\CommentTok{/*Heston params*/}\OperatorTok{...);}
+\NormalTok{PYBIND11\_MODULE}\OperatorTok{(}\NormalTok{fastmm}\OperatorTok{,}\NormalTok{ m}\OperatorTok{)} \OperatorTok{\{}
+\NormalTok{    m}\OperatorTok{.}\NormalTok{def}\OperatorTok{(}\StringTok{"cos\_price"}\OperatorTok{,} \OperatorTok{\&}\NormalTok{cos\_price}\OperatorTok{,} \StringTok{"COS European price"}\OperatorTok{);}
+\OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Verify vs.~a PyTorch Monte Carlo benchmark; report convergence
+vs.~\texttt{N}. \emph{Errors:} wrong truncation interval (−3); no MC
+verification (−3).
+
+\textbf{7.2 Robust implied vol (C++) (10 pts).} Rational initial guess +
+safeguarded Newton/Halley; converges in the wings and at short expiry.
+\emph{Errors:} unguarded Newton diverging in the wings (−4); no
+convergence evidence (−3).
+
+\textbf{7.3 Greeks validated by autograd (12 pts).} Compare the C++
+Greek vector to a PyTorch-autograd reference of the \emph{same} pricer;
+max rel. error \textless{} 1e-4. \textbf{Do not hand-code adjoint AD in
+C++.} \emph{Errors:} no autograd reference (−5); only first-order Greeks
+(−3).
+
+\textbf{7.4 Vectorized surface revaluation (C++) (10 pts).} Revalue
+300--500 contracts under 5 ms on one core; \textbf{release the GIL}
+around the C++ loop; report a latency distribution. \emph{Errors:} GIL
+held during the hot loop (−3); only the mean reported (−2).
+
+\textbf{7.5 The binder, explained (8 pts).} \texttt{BINDING.md} explains
+zero-copy tensor passing (buffer protocol / \texttt{py::array\_t}), GIL
+release, and the CMake \texttt{find\_package(pybind11)} build.
+\emph{Errors:} hand-waves the GIL or the zero-copy mechanism (−3).
+
+\emph{Milestone 2 rubric: see Handbook Part III §3.2. Latency is a hard
+gate.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 8 --- Options Market Making and
+Hedging}\label{problem-set-8-options-market-making-and-hedging}
+
+\textbf{8.1 Multi-Greek inventory (10 pts).} A fill jumps \texttt{q} by
+the filled option's Greek vector. Unit-test the jump. \emph{Errors:}
+missing the multi-contract structure (−3); wrong aggregation (−3).
+
+\textbf{8.2 El Aoud--Abergel solver (15 pts).} Reduced problem on the
+inventory vector with quadratic penalty \texttt{0.5\ q\^{}T\ Sigma\ q};
+verify collapse to Avellaneda--Stoikov in 1-D. \emph{Errors:} skipping
+the 1-D reduction check (−4); multi-dimensional algebra errors (−3 ea).
+
+\textbf{8.3 Penalty-matrix calibration (10 pts).} \texttt{Sigma} from
+the empirical Greek covariance; justify each entry from data.
+\emph{Errors:} identity matrix (−4); entries not justified (−4).
+
+\textbf{8.4 Gamma--theta--variance identity (10 pts).} Hedged short-call
+P\&L
+\texttt{=\ integral\ \ 0.5\ Gamma\_t\ (sigma\^{}2\_real\ -\ sigma\^{}2\_impl)\ S\_t\^{}2\ dt}.
+Verify numerically. \emph{Errors:} sign on theta (−2); missing the ½
+factor (−2); not isolating the realized-vs-implied term (−3).
+
+\textbf{8.5 Threshold hedger + engine (10 pts).} Hedge when
+\texttt{\textbar{}Delta\textbar{}\textgreater{}0.1\ BTC}; integrate with
+the Week-5 engine; report cost and risk reduction. \emph{Errors:} not
+integrated with the engine (−4); cost without risk reduction (−3).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 9 --- Backtesting, Risk, and Taker Flow
+(Milestone
+3)}\label{problem-set-9-backtesting-risk-and-taker-flow-milestone-3}
+
+\textbf{9.1 Event-driven backtest (12 pts).} Deterministic replay;
+bitwise identical re-run. \emph{Errors:} non-deterministic (−5); float
+drift (−2, warn).
+
+\textbf{9.2 Fill simulator (12 pts).} Fill prob ≈ exponential in quote
+distance, parameter depends on contract liquidity; calibrate on train,
+validate on holdout. \emph{Errors:} no holdout (−5); silent overfit
+(−3).
+
+\textbf{9.3 Full backtest (12 pts).} Metrics with
+\textbf{block-bootstrap CI} on Sharpe; Greek time series. \emph{Errors:}
+no CI (−3); Sharpe without baseline context (−2).
+
+\textbf{9.4 P\&L attribution (10 pts).} Streams sum to total P\&L ---
+assert it. \emph{Errors:} attribution not summing to total (−5; always a
+bug).
+
+\textbf{9.5 Drawdown forensic + taker analysis (10 pts).} Identify the
+worst-drawdown day, the driving positions, a counterfactual, and the
+taker flow (from the guest lecture) that hit your quotes. \emph{Errors:}
+no specific positions (−4); no counterfactual (−3).
+
+\emph{Milestone 3 rubric: see Handbook Part III §3.3.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Problem Set 10 --- Advanced Extension and Final
+Report}\label{problem-set-10-advanced-extension-and-final-report}
+
+\textbf{10.1 Proposal (5 pts).} One page, realistic scope.
+\emph{Errors:} late (−3); ignores the time budget (−2).
+
+\textbf{10.2 Implementation (20 pts).} Chosen extension in PyTorch on
+the milestone infrastructure. \emph{Errors:} does not run (≤ 8 for
+design); honest partials get scaled credit.
+
+\textbf{10.3 Evaluation (15 pts).} Vs. the Week-9 baseline, shared
+metrics. \emph{Errors:} missing baseline (−5); cherry-picked metrics
+(−5).
+
+\textbf{10.4 Final report (25 pts).} See the report rubric (Handbook
+Part III §3.4).
+
+\textbf{10.5 Final presentation (15 pts).} See the presentation rubric
+(Handbook Part III §3.4).
+
+\end{document}

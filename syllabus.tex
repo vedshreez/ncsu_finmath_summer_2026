@@ -1,0 +1,1094 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% ---------------------------------------------------------------------------
+% Unicode -> LaTeX mappings so these documents compile and render correctly
+% under xelatex (and pdflatex) without depending on a particular system font.
+% Every non-ASCII glyph used in the course text is mapped explicitly; this is
+% needed because the documents use mathematical symbols inside running text
+% and inside inline-code spans, where unicode-math would otherwise treat them
+% as math-only and abort.
+% ---------------------------------------------------------------------------
+\usepackage{amssymb}
+\usepackage{newunicodechar}
+
+% --- Greek (lower case) ---
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{ν}{\ensuremath{\nu}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{ς}{\ensuremath{\varsigma}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+% --- Greek (capitals) ---
+\newunicodechar{Γ}{\ensuremath{\Gamma}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+
+% --- Math symbols ---
+\newunicodechar{ℝ}{\ensuremath{\mathbb{R}}}
+\newunicodechar{∂}{\ensuremath{\partial}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{∫}{\ensuremath{\int}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{½}{\textonehalf}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{⟶}{\ensuremath{\longrightarrow}}
+
+% --- Superscripts / modifier letters ---
+\newunicodechar{²}{\ensuremath{^{2}}}
+\newunicodechar{³}{\ensuremath{^{3}}}
+\newunicodechar{⁺}{\ensuremath{^{+}}}
+\newunicodechar{⁻}{\ensuremath{^{-}}}
+\newunicodechar{ᵀ}{\ensuremath{^{\mathsf{T}}}}
+\newunicodechar{ᵏ}{\ensuremath{^{k}}}
+
+% --- Punctuation / misc text symbols ---
+\newunicodechar{…}{\textellipsis}
+\newunicodechar{§}{\S}
+\newunicodechar{⚑}{\textbf{[!]}}
+
+% --- Accented Latin (author names) ---
+\newunicodechar{Á}{\'A}
+\newunicodechar{Ø}{\O}
+\newunicodechar{ä}{\"a}
+\newunicodechar{é}{\'e}
+\newunicodechar{ó}{\'o}
+\newunicodechar{ô}{\^o}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Optimal Market Making for Cryptocurrency Options},
+  pdfauthor={North Carolina State University · Financial Mathematics},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Optimal Market Making for Cryptocurrency Options}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{The Avellaneda--Stoikov Framework and its Extension to
+Options}
+\author{North Carolina State University · Financial Mathematics}
+\date{Summer 2026}
+
+\begin{document}
+\maketitle
+
+\includegraphics[width=2.6in,height=\textheight,keepaspectratio]{assets/ncsu_logo.png}
+
+\section{Optimal Market Making for Cryptocurrency
+Options}\label{optimal-market-making-for-cryptocurrency-options}
+
+\textbf{The Avellaneda--Stoikov Framework and its Extension to Options}
+
+A 10-Week Summer Research Program
+
+North Carolina State University --- Department of Mathematics
+
+\textbf{Industry Mentor:} Dendi Suhubdy --- \emph{Bitwyre}, San
+Francisco
+
+\textbf{Guest Practitioner:} Fenni Kang --- Chief Strategy Officer,
+\emph{Coincall}
+
+Edition: 2026
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. Course Overview}\label{course-overview}
+
+This ten-week summer research program prepares students in the North
+Carolina State University Financial Mathematics graduate program to
+design, implement, and evaluate optimal market making strategies for
+cryptocurrency options. The program is organized around the
+\textbf{Avellaneda--Stoikov framework}, the foundational
+stochastic-control approach to optimal liquidity provision. The central
+pedagogical question is how to extend Avellaneda--Stoikov, which was
+originally formulated for a single linear instrument, to non-linear
+derivatives whose inventory risk is multi-dimensional in the Greeks. A
+dedicated advanced week treats extensions of Avellaneda--Stoikov to the
+multi-asset, adverse-selection, discrete-inventory, signal-driven, and
+robust settings.
+
+Week 1 was an \textbf{introduction week}, delivered last week: it
+covered the program goals, the development environment, the Coincall
+datasets, and the logistics described in Sections 1.5--1.7. The nine
+technical weeks that follow (Weeks 2--10) are the substance of this
+syllabus.
+
+The program is mentored by Dendi Suhubdy and includes two guest sessions
+from Fenni Kang, Chief Strategy Officer at Coincall, on \textbf{taker
+strategies} (Week 9) and on the \textbf{corporate usage of options and
+structured products} (Week 10). Students will work with live and
+historical Coincall data throughout the program and will produce a
+research-grade final report and code repository suitable for further
+academic or industry use.
+
+\subsubsection{1.1 Implementation
+Languages}\label{implementation-languages}
+
+The program uses a deliberate two-language split, and students should
+understand the rationale:
+
+\begin{itemize}
+\item
+  \textbf{Problem sets are written in Python}, using \textbf{PyTorch} as
+  the numerical engine. PyTorch is chosen so that \emph{differentiation
+  is handled implicitly by autograd}: students compute option Greeks,
+  calibrate surfaces, and fit intensities by writing the forward
+  computation only and letting \texttt{.backward()} produce the
+  sensitivities. We deliberately do \textbf{not} ask students to
+  hand-derive adjoint algorithmic differentiation; the goal is correct,
+  readable research code, not AD plumbing.
+\item
+  \textbf{Fast-computation methods are written in C++.} The
+  latency-critical numerical kernels --- characteristic-function
+  pricers, implied-volatility inversion, and full-surface revaluation
+  --- are implemented in C++ for speed, then exposed to Python through a
+  \textbf{\texttt{pybind11}} binding so that the same Python research
+  code can call them. Week 7 teaches \texttt{pybind11} explicitly: how
+  to write a binding module, build it with CMake, manage the GIL, and
+  pass NumPy/PyTorch tensors across the boundary without copying.
+\end{itemize}
+
+The result is a realistic hybrid that mirrors industry practice: Python
+for research and orchestration, C++ for the hot path, and a clean binder
+between them.
+
+\subsubsection{1.2 Learning Objectives}\label{learning-objectives}
+
+Upon successful completion of this program, students will be able to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Formulate a market making problem as a continuous-time stochastic
+  optimal control problem and understand the associated
+  Hamilton--Jacobi--Bellman (HJB) equation.
+\item
+  Solve the HJB system for the Avellaneda--Stoikov model in closed form
+  and implement the resulting quoting policy as a Python/PyTorch engine
+  validated against the analytical solution.
+\item
+  Calibrate parametric volatility surfaces (SVI, SABR) to live
+  cryptocurrency options data in PyTorch and assess their stability
+  across time.
+\item
+  Implement latency-critical pricing, implied-volatility, and Greek
+  routines in C++ and call them from Python through a \texttt{pybind11}
+  binding.
+\item
+  Extend the Avellaneda--Stoikov framework to a multi-Greek inventory
+  penalty following El Aoud and Abergel, and reduce the resulting HJB
+  system to a numerically tractable form.
+\item
+  Integrate a dynamic hedging policy with the quoting engine and analyze
+  the resulting P\&L attribution.
+\item
+  Build and validate an event-driven backtest that consumes real
+  Coincall order-book data and produces interpretable P\&L, risk, and
+  Greek-exposure diagnostics.
+\item
+  Situate the maker (market-making) perspective against \textbf{taker
+  strategies}, and understand how options are used by corporates through
+  \textbf{structured products} (collars, accumulators/decumulators,
+  coupon products).
+\item
+  Implement at least one advanced extension of Avellaneda--Stoikov and
+  communicate the results in writing and orally at a level suitable for
+  industry quantitative-research interviews.
+\end{enumerate}
+
+\subsubsection{1.3 Prerequisites}\label{prerequisites}
+
+Students are expected to have completed or be concurrently enrolled in
+graduate coursework covering: stochastic calculus (Itô integration,
+Itô's lemma, Girsanov's theorem), continuous-time stochastic processes
+(Brownian motion, Poisson processes, jump-diffusions),
+Black--Scholes--Merton option pricing, partial differential equations at
+the level of Evans, and probability theory at the level of Durrett.
+
+Programming maturity in \textbf{Python} is required, including comfort
+with NumPy and the basics of \textbf{PyTorch} (tensors, autograd).
+Familiarity with \textbf{modern C++ (C++17)} and \textbf{CMake} is
+advantageous for the fast-computation week but is taught from a working
+scaffold; no prior \texttt{pybind11} experience is assumed.
+
+\subsubsection{1.4 Structure}\label{structure}
+
+The program runs for ten weeks. Week 1 was the introduction week
+(delivered last week). Each of the nine technical weeks (Weeks 2--10)
+comprises two ninety-minute lectures, one ninety-minute recitation, and
+approximately fifteen hours of independent reading, programming, and
+benchmarking. \textbf{Weeks 5, 7, and 9 are milestone weeks} at which
+students deliver a working software component built on the preceding
+weeks' material. The final week (Week 10) surveys advanced
+Avellaneda--Stoikov extensions and is devoted to a chosen extension
+topic and the preparation and presentation of a research-grade final
+report.
+
+The schedule is built around the Avellaneda--Stoikov framework as the
+unifying worked example: it is introduced in Week 3, placed within the
+general continuous-time control template in Week 4, implemented as a
+production engine in Week 5, and extended to a multi-Greek options
+setting in Week 8. Extensions of Avellaneda--Stoikov are consolidated
+into the dedicated advanced week (Week 10) rather than being interleaved
+throughout.
+
+\subsubsection{1.5 Assessment}\label{assessment}
+
+Final grades are determined as follows. Weekly problem sets account for
+thirty percent of the grade. The three milestone deliverables in Weeks
+5, 7, and 9 jointly account for thirty percent. The final report and
+presentation account for thirty percent. Active participation in
+lecture, recitation, and code review accounts for the remaining ten
+percent.
+
+The weekly problem sets are distributed as a separate \textbf{Problem
+Sets} booklet; fully worked solutions are distributed (to graders, and
+to students after each deadline) as a separate \textbf{Solutions}
+booklet.
+
+\subsubsection{1.6 Mentorship Model}\label{mentorship-model}
+
+Students will have access to weekly thirty-minute one-on-one office
+hours with the industry mentor, in addition to scheduled lectures and
+recitations. Office hours are intended for clarification of difficult
+material, code review of milestone deliverables, and discussion of
+research directions for the final week.
+
+\subsubsection{1.7 Guest Practitioner
+Sessions}\label{guest-practitioner-sessions}
+
+Fenni Kang (Chief Strategy Officer, Coincall) contributes two guest
+sessions, integrated as additional lectures within the regular schedule:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Week 9 --- Taker Strategies.} A practitioner's view of
+  liquidity \emph{consumption}: when and why takers cross the spread,
+  the signals that drive aggressive flow, and how taker behaviour shapes
+  the order flow that the market maker must price.
+\item
+  \textbf{Week 10 --- Corporate Usage of Options and Structured
+  Products.} How corporates and treasuries use options: collars to fix a
+  price band, accumulators and decumulators for staged
+  accumulation/liquidation, and coupon (yield-enhancement) products. The
+  session connects the market-maker's book to the structured-product
+  flow that generates it.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. Program Milestones at a
+Glance}\label{program-milestones-at-a-glance}
+
+The program is organized around three milestone deliverables. Each
+milestone integrates the material from the preceding weeks and produces
+a software artifact that is incorporated into the final research
+repository.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2308}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2692}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Week
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Deliverable
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+5 & Linear-asset Avellaneda--Stoikov engine & Python/PyTorch
+implementation of the Avellaneda--Stoikov model on a single linear
+asset, validated against simulated dynamics and benchmarked on one month
+of Coincall BTC-PERP order-book data. \\
+7 & Fast pricing and Greeks library & C++ pricing/implied-vol/Greeks
+library for European options under Black--Scholes and Heston dynamics,
+exposed to Python via \texttt{pybind11}, with PyTorch reference Greeks.
+Latency target: full Coincall BTC surface revaluation in under 5
+milliseconds. \\
+9 & Full options market-making backtest & Event-driven backtest of the
+multi-Greek market-making engine on three months of Coincall BTC and ETH
+options data, with full P\&L attribution, risk metrics, and
+Greek-exposure time series. \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. Week-by-Week Schedule}\label{week-by-week-schedule}
+
+Each of the following sections gives the learning objectives, lecture
+outlines, recitation activity, required reading, and (where applicable)
+milestone deliverable for one week of the program. Detailed problem-set
+questions live in the separate Problem Sets booklet; each week below
+lists the problem set's scope and its implementation language.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 1 --- Introduction
+(Delivered)}\label{week-1-introduction-delivered}
+
+\emph{Theme: orientation, environment, and data. This week was delivered
+last week and is recorded here for completeness.}
+
+Week 1 introduced the program's goals and arc, the maker-versus-taker
+framing, and the development environment. Students set up the Python +
+PyTorch toolchain, a C++17 toolchain with CMake, and a working
+\texttt{pybind11} ``hello world'' binding; received credentials to the
+Coincall data store; and signed the data-use agreement. There was no
+graded problem set for Week 1.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 2 --- Foundations of Market
+Microstructure}\label{week-2-foundations-of-market-microstructure}
+
+\emph{Theme: from limit order books to the economic role of the market
+maker.}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Reconstruct a limit order book from raw exchange feeds and compute
+  standard liquidity metrics.
+\item
+  Articulate the three classical components of the bid-ask spread and
+  identify them in real data.
+\item
+  Explain the role of the market maker as a continuously quoting
+  liquidity provider, and contrast it with directional and taker
+  trading.
+\end{itemize}
+
+\textbf{Lecture 1 --- Limit Order Book Mechanics.} Order types (market,
+limit, IOC, post-only, hidden); price-time priority and the matching
+algorithm; L1/L2/L3 order-book views; tick size and lot size; and the
+Coincall exchange architecture (contract specifications, fee structure,
+market maker tiers).
+
+\textbf{Lecture 2 --- Spread Decomposition and the Role of the Market
+Maker.} The bid-ask spread decomposed into adverse selection, inventory,
+and order-processing components, via the classical models of Roll
+(1984), Glosten--Milgrom (1985), and Kyle (1985); realized spread,
+effective spread, and price impact; why crypto microstructure differs
+from equities.
+
+\textbf{Recitation.} Reconstruct the order book from a Coincall
+tick-level recording in Python: replay one hour of BTC-PERP events and
+produce a time series of mid-prices, spreads, and book depth. Output: a
+Python class that maintains live order-book state from raw events.
+
+\textbf{Required Reading.} Cartea, Jaikumar, and Penalva (2015), Ch.
+1--3; Roll (1984); Glosten and Milgrom (1985).
+
+\textbf{Problem Set 2 (Python).} Order-book reconstruction, the Roll
+estimator, the Glosten--Milgrom quote-setter (belief update simulated in
+PyTorch), and a realized-spread / price-impact decomposition on Coincall
+data. See the Problem Sets booklet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 3 --- The Avellaneda--Stoikov
+Model}\label{week-3-the-avellanedastoikov-model}
+
+\emph{Theme: a fully worked example of optimal market making through
+stochastic control.}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Set up the Avellaneda--Stoikov problem as a continuous-time stochastic
+  control problem with exponential utility.
+\item
+  Understand the associated HJB equation and its reduction to a system
+  of ODEs through the standard ansatz.
+\item
+  Interpret the closed-form reservation price and optimal half-spread
+  economically.
+\end{itemize}
+
+\textbf{Lecture 1 --- Setup and Dynamics.} Mid-price as arithmetic
+Brownian motion; Poisson order flow with intensity λ(δ) = A·exp(−κδ);
+wealth and inventory dynamics; exponential (CARA) utility and why it
+makes the problem tractable; the terminal liquidation penalty.
+
+\textbf{Lecture 2 --- HJB Solution.} The dynamic programming principle
+and the HJB equation; the separation ansatz V(t,x,S,q) =
+−exp(−γ(x+qS))·θ(t,q); reduction to ODEs in θ; the reservation price r =
+S − qγσ²(T−t); and the optimal half-spread and its decomposition into
+risk-aversion and order-flow components.
+
+\textbf{Recitation.} Walk through the derivation together, then
+implement the closed-form quotes in PyTorch and visualize the
+reservation price and spread as functions of inventory.
+
+\textbf{Required Reading.} Avellaneda and Stoikov (2008); Cartea,
+Jaikumar, and Penalva (2015), Ch. 10.
+
+\textbf{Problem Set 3 (Python/PyTorch).} A PyTorch ODE solver for θ(t,q)
+validated against the closed-form quotes; a reusable quote engine; a
+one-day simulation comparing optimal vs.~symmetric quoting; a γ
+sensitivity sweep; and a price-impact experiment. See the Problem Sets
+booklet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 4 --- Stochastic Optimal Control in Continuous
+Time}\label{week-4-stochastic-optimal-control-in-continuous-time}
+
+\emph{Theme: the general theory underlying the previous week's worked
+example.}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  State and apply the dynamic programming principle in a general
+  continuous-time setting.
+\item
+  Understand the HJB equation for a generic control problem and the role
+  of the verification theorem.
+\item
+  Recognize the role of CARA and CRRA utilities in producing tractable
+  problems.
+\end{itemize}
+
+\textbf{Lecture 1 --- Dynamic Programming and the HJB Equation.}
+Controlled diffusions and admissible controls; the dynamic programming
+principle; the infinitesimal generator; derivation of the HJB equation;
+boundary and terminal conditions.
+
+\textbf{Lecture 2 --- Verification Theorems and Tractable Utilities.}
+The verification theorem and smooth-fit conditions; viscosity solutions
+as the setting for non-smooth value functions; CARA, CRRA, and HARA
+families; why CARA decouples the value function from wealth in market
+making.
+
+\textbf{Recitation.} Worked solutions to Merton's portfolio problem
+under CARA and CRRA, and an optimal-liquidation problem with linear
+impact, identifying the recurring pattern: HJB → ansatz → ODE →
+solution.
+
+\textbf{Required Reading.} Pham (2009), Ch. 3--4; Cartea, Jaikumar, and
+Penalva (2015), Ch. 6.
+
+\textbf{Problem Set 4 (Python/PyTorch).} PyTorch solvers for the Merton
+problem under CRRA and CARA; an Almgren--Chriss optimal-execution
+solver; an HJB-residual verification harness; and an obstacle-problem
+(variational-inequality) solver illustrating where viscosity solutions
+are needed. See the Problem Sets booklet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 5 --- The Avellaneda--Stoikov Engine:
+Implementation, Calibration, and
+Backtest}\label{week-5-the-avellanedastoikov-engine-implementation-calibration-and-backtest}
+
+\emph{Theme: turning the closed-form solution into a calibrated,
+backtested quoting engine. \textbf{Milestone 1.}}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Implement the Avellaneda--Stoikov quotes as a clean, tested
+  Python/PyTorch engine validated against the analytical solution.
+\item
+  Calibrate the order-flow intensity functions from historical Coincall
+  fill data by maximum likelihood.
+\item
+  Build an event-driven backtest harness and benchmark the engine on one
+  month of Coincall BTC-PERP data.
+\end{itemize}
+
+\textbf{Lecture 1 --- From Closed Form to Code.} Engine architecture;
+state management (inventory, cash, mid-price estimation from the L2
+book); mapping continuous-time quantities to discrete event arrivals;
+calibrating λ(δ) = A·exp(−κδ) from fill data; numerical pitfalls (units,
+cash-process sign conventions, inventory indexing).
+
+\textbf{Lecture 2 --- Calibration, Simulation, and Validation.}
+Maximum-likelihood calibration of A and κ with goodness-of-fit; the
+backtest harness (replay engine, fill simulator, P\&L attribution);
+validating the P\&L distribution against theory; reproducibility under a
+fixed seed.
+
+\textbf{Recitation.} Code review of student engines in progress; each
+student walks through one simulated trading day; group resolution of
+common bugs; walk-through of the Milestone 1 acceptance criteria.
+
+\textbf{Required Reading.} Avellaneda and Stoikov (2008) (re-read with
+implementation in mind); Guéant (2016), Ch. 4 (single-asset market
+making, engineering background).
+
+\textbf{Problem Set 5 (Python/PyTorch).} Constitutes Milestone 1: an
+optimized quote path, ML intensity calibration, reproduction of the
+paper's inventory/P\&L behaviour, a one-month backtest vs.~a symmetric
+baseline, and a \texttt{pytest} suite with reproducible seeds. See the
+Problem Sets booklet.
+
+\begin{quote}
+\textbf{Milestone Deliverable --- Milestone 1: Linear-Asset
+Avellaneda--Stoikov Engine.} A Python/PyTorch package implementing the
+Avellaneda--Stoikov model on a single linear asset, with calibration,
+simulation, and backtesting infrastructure, and a reproducible one-month
+backtest on Coincall BTC-PERP data documented in a short technical
+report.
+
+\emph{Datasets:} \texttt{coincall\_btc\_perp\_l2\_2025Q4.parquet},
+\texttt{coincall\_btc\_perp\_trades\_2025Q4.parquet},
+\texttt{coincall\_intensity\_calibration\_set.parquet}.
+
+\emph{Acceptance criteria:} quote computation vectorized over inventory
+in PyTorch; intensity calibration with χ² goodness-of-fit; backtest P\&L
+within ±50\% of the mentor's reference; reproducible under a fixed seed;
+\texttt{pytest} coverage of the core quote computation; report ≤ 10
+pages.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 6 --- Options Pricing, the Volatility Surface, and
+Calibration}\label{week-6-options-pricing-the-volatility-surface-and-calibration}
+
+\emph{Theme: options theory and the practical construction of a
+volatility surface.}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Recall the Greeks of European options, including the second-order
+  Greeks vanna and volga.
+\item
+  State the no-static-arbitrage constraints on the volatility surface
+  and verify them on parametric surfaces.
+\item
+  Calibrate SVI and SABR parameterizations to live Coincall options data
+  with attention to stability.
+\end{itemize}
+
+\textbf{Lecture 1 --- Greeks and the Volatility Surface.} Black--Scholes
+and the Greek vector; vanna, volga, and volatility risk; the
+implied-volatility smile and term structure; calendar and butterfly
+arbitrage; features of the crypto options surface (sparse strikes, wide
+wings, quote staleness).
+
+\textbf{Lecture 2 --- Parameterization and Calibration.} Raw SVI and the
+arbitrage-free SVI/eSSVI formulation; SVI calibration by nonlinear least
+squares; the SABR formula and the Hagan expansion; time-stability of
+calibrated parameters; diagnostic plots.
+
+\textbf{Recitation.} Live calibration in PyTorch: load a Coincall chain
+snapshot, fit SVI and SABR (using autograd for the Jacobians), and
+produce the standard diagnostics.
+
+\textbf{Required Reading.} Gatheral (2006), Ch. 1--5; Gatheral and
+Jacquier (2014); Hagan et al.~(2002); Hull (2021), Ch. 15, 19--21.
+
+\textbf{Problem Set 6 (Python/PyTorch).} Black--Scholes price and Greeks
+with PyTorch autograd (including vanna/volga); SVI with arbitrage-free
+constraint checks; SVI and SABR calibration to a Coincall snapshot; and
+a one-month daily-calibration stability study with smoothing. See the
+Problem Sets booklet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 7 --- Fast Computation of Prices, Greeks, Implied
+Volatility, and
+Surfaces}\label{week-7-fast-computation-of-prices-greeks-implied-volatility-and-surfaces}
+
+\emph{Theme: the latency budget of an options market maker, and the C++
+numerical methods that meet it. \textbf{Milestone 2.}}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Implement and benchmark characteristic-function pricing methods
+  (Carr--Madan FFT and Fang--Oosterlee COS) in C++.
+\item
+  Implement robust, fast implied-volatility inversion and full-surface
+  revaluation in C++.
+\item
+  Expose the C++ kernels to Python with \texttt{pybind11}, and validate
+  Greeks against PyTorch autograd.
+\end{itemize}
+
+\textbf{Lecture 1 --- Characteristic-Function Pricing and Implied
+Volatility in C++.} The characteristic function under Black--Scholes and
+Heston; the Carr--Madan FFT method; the Fang--Oosterlee COS method and
+its truncation interval; robust implied-vol inversion (Jäckel-style
+rational starts plus a safeguarded Newton/Halley step); vectorizing a
+whole surface.
+
+\textbf{Lecture 2 --- Binding C++ to Python with \texttt{pybind11}.}
+This is the binder lecture. How a \texttt{pybind11} module is structured
+and built with CMake; passing NumPy/PyTorch tensors across the boundary
+without copying (buffer protocol, \texttt{py::array\_t}); releasing the
+GIL around the C++ hot loop; and how to keep a single source of truth
+for Greeks by validating the C++ results against PyTorch autograd. We
+rely on PyTorch for \emph{reference} Greeks rather than hand-rolling
+adjoint AD in C++ --- autograd is the oracle, C++ is the speed.
+
+\textbf{Recitation.} Profile a naive Python pricer, move the kernel to
+C++, bind it with \texttt{pybind11}, and re-benchmark --- targeting at
+least an order of magnitude speedup and a sub-5ms full-surface
+revaluation.
+
+\textbf{Required Reading.} Carr and Madan (1999); Fang and Oosterlee
+(2008); Jäckel (2015), \emph{Let's Be Rational}; the \texttt{pybind11}
+documentation (overview, NumPy, and GIL sections).
+
+\textbf{Problem Set 7 (C++ with \texttt{pybind11}, called from Python).}
+Constitutes Milestone 2: a C++ COS/Carr--Madan pricer, a robust C++
+implied-vol solver, a vectorized surface revaluation, all bound to
+Python via \texttt{pybind11}, with Greeks validated against PyTorch
+autograd and latency reported as a distribution. See the Problem Sets
+booklet.
+
+\begin{quote}
+\textbf{Milestone Deliverable --- Milestone 2: Fast Pricing and Greeks
+Library.} A C++ library that prices European options under
+Black--Scholes and Heston via characteristic-function methods, inverts
+implied volatility robustly, computes the full Greek vector, and
+revalues the entire calibrated Coincall surface within a strict latency
+budget --- all exposed to Python through a \texttt{pybind11} module.
+Greeks are validated against an independent PyTorch-autograd reference.
+
+\emph{Datasets:}
+\texttt{coincall\_btc\_options\_chain\_snapshots\_2025Q4.parquet},
+\texttt{coincall\_calibrated\_svi\_surfaces\_2025Q4.parquet},
+\texttt{coincall\_reference\_prices\_2025Q4.parquet}.
+
+\emph{Acceptance criteria:} full BTC surface (300--500 contracts)
+revalued with full Greek vector in under 5 ms on one CPU core; max
+relative pricing error 1e-4 vs.~reference; Greeks within 1e-4 of PyTorch
+autograd; clean \texttt{pybind11} API importable from Python; tests over
+all pricers, the implied-vol solver, and the surface adapter; latency
+reported as a distribution, not just a mean.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 8 --- Options Market Making Theory and Dynamic
+Hedging}\label{week-8-options-market-making-theory-and-dynamic-hedging}
+
+\emph{Theme: extending Avellaneda--Stoikov to a multi-Greek inventory
+penalty, and integrating a dynamic hedging policy.}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Set up the El Aoud--Abergel framework, in which inventory is a vector
+  of Greeks.
+\item
+  Understand the multi-Greek HJB system and the inventory penalty as a
+  quadratic form.
+\item
+  Understand delta and gamma hedging and quantify the P\&L attribution
+  of a hedged options book.
+\end{itemize}
+
+\textbf{Lecture 1 --- Multi-Dimensional Inventory and the Multi-Greek
+HJB.} The inventory vector q = (Δ, Γ, ν, \ldots) and its dynamics under
+quoting; the quadratic inventory penalty and its economic
+interpretation; the multi-Greek HJB and separation ansatz; reduction to
+a problem on the inventory vector; verification that it reduces to
+Avellaneda--Stoikov in the one-dimensional case.
+
+\textbf{Lecture 2 --- Dynamic Hedging and Integration with Quoting.}
+Continuous and discrete delta hedging; the
+gamma--theta--realized-variance identity; gamma scalping; vega hedging
+and skew risk; external vs.~integrated hedging architectures; perpetual
+futures as the delta-hedging instrument and funding-rate considerations
+on Coincall.
+
+\textbf{Recitation.} Multi-Greek HJB walk-through, then a PyTorch
+hedged-book simulation comparing hedge policies and P\&L distributions.
+
+\textbf{Required Reading.} El Aoud and Abergel (2015); Taleb (1997),
+selected chapters; Cartea, Jaikumar, and Penalva (2015), Ch. 11.
+
+\textbf{Problem Set 8 (Python/PyTorch).} Multi-Greek inventory
+aggregation and dynamics; a PyTorch solver for the El Aoud--Abergel
+reduced problem verified to collapse to Avellaneda--Stoikov in 1-D;
+penalty-matrix calibration from Coincall Greek covariances; numerical
+verification of the gamma--theta--variance identity; and a threshold
+delta-hedger integrated with the Week 5 engine. See the Problem Sets
+booklet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 9 --- Backtesting, Risk Analysis, and Taker
+Strategies}\label{week-9-backtesting-risk-analysis-and-taker-strategies}
+
+\emph{Theme: assembling the full system and validating it on historical
+data, with a practitioner's view of taker flow. \textbf{Milestone 3.}}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Implement an event-driven backtest harness suitable for options market
+  making.
+\item
+  Produce a full P\&L attribution (spread, inventory, gamma, vega,
+  hedging).
+\item
+  Analyze risk metrics and identify regimes of out- and
+  under-performance.
+\item
+  Understand taker strategies and how aggressive flow shapes the maker's
+  problem.
+\end{itemize}
+
+\textbf{Lecture 1 --- Backtesting Architecture and Risk Metrics.}
+Event-driven simulation (clock, event queue, deterministic replay); the
+fill simulator; state tracking (cash, inventory by contract, aggregated
+Greeks, hedge position); pitfalls (look-ahead bias, unrealistic fills,
+expiry handling); Sharpe/Sortino/Calmar, drawdown, and P\&L attribution;
+the deflated Sharpe ratio and block-bootstrap confidence intervals.
+
+\textbf{Lecture 2 (Guest --- Fenni Kang, Coincall) --- Taker
+Strategies.} A practitioner's view of liquidity consumption: when and
+why takers cross the spread; the signals that drive aggressive flow
+(momentum, liquidation cascades, news); execution styles (sweep,
+TWAP/VWAP, iceberg-taking); and what taker behaviour implies for the
+toxicity of the order flow a market maker faces.
+
+\textbf{Recitation.} Code review of the full backtest; each student
+presents one regime and walks through the P\&L attribution.
+
+\textbf{Required Reading.} Cartea, Jaikumar, and Penalva (2015), Ch.
+10--11 (re-read); Bailey and López de Prado (2014); López de Prado
+(2018), Ch. 11--13.
+
+\textbf{Problem Set 9 (Python/PyTorch).} Constitutes Milestone 3: an
+event-driven backtest with deterministic replay, a calibrated/validated
+fill simulator, a full multi-Greek backtest with risk metrics and Greek
+time series, the P\&L attribution decomposition, and a worst-drawdown
+forensic with a taker-flow analysis informed by the guest lecture. See
+the Problem Sets booklet.
+
+\begin{quote}
+\textbf{Milestone Deliverable --- Milestone 3: Full Options
+Market-Making Backtest.} A complete backtest of the multi-Greek engine
+on three months of Coincall BTC and ETH options data, with full P\&L
+attribution, risk metrics, and Greek-exposure time series, reproducible
+from a configuration file and documented in a technical report (≤ 20
+pages) that includes a drawdown forensic.
+
+\emph{Datasets:} \texttt{coincall\_btc\_options\_l2\_2025Q4.parquet},
+\texttt{coincall\_btc\_options\_trades\_2025Q4.parquet},
+\texttt{coincall\_eth\_options\_l2\_2025Q4.parquet},
+\texttt{coincall\_eth\_options\_trades\_2025Q4.parquet},
+\texttt{coincall\_btc\_eth\_perp\_l2\_2025Q4.parquet},
+\texttt{coincall\_funding\_rates\_2025Q4.parquet}.
+
+\emph{Acceptance criteria:} reproducible from config; attribution sums
+to total P\&L within 1 bp; Sharpe reported with block-bootstrap CI;
+Greek exposures bounded within configured limits; report includes a
+forensic of at least one drawdown event.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Week 10 --- Advanced Avellaneda--Stoikov, Structured
+Products, and Final
+Presentations}\label{week-10-advanced-avellanedastoikov-structured-products-and-final-presentations}
+
+\emph{Theme: advanced extensions of Avellaneda--Stoikov, the corporate
+structured-products view, one chosen extension, and the communication of
+results.}
+
+\textbf{Learning Objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Survey advanced extensions of Avellaneda--Stoikov (multi-asset,
+  adverse selection, discrete inventory, signal-driven, robust) and
+  implement one.
+\item
+  Understand how corporates use options through structured products.
+\item
+  Write and present a research-grade report.
+\end{itemize}
+
+\textbf{Lecture 1 --- Advanced Avellaneda--Stoikov Extensions.}
+Multi-asset market making across BTC and ETH options under a correlated
+covariance matrix; adverse-selection-aware quoting and skew trading from
+calibrated SVI parameters; signal-driven quoting (machine-learned
+order-flow prediction); discrete-inventory formulations; and robust
+optimization with a worst-case inventory penalty over a confidence set.
+Students choose one extension by end of day.
+
+\textbf{Lecture 2 (Guest --- Fenni Kang, Coincall) --- Corporate Usage
+of Options and Structured Products.} How corporates and treasuries use
+options: \textbf{collars} to fix a price band on a holding;
+\textbf{accumulators / decumulators} for staged accumulation or
+liquidation; and \textbf{coupon / yield-enhancement products}. The
+session links these structured-product flows to the market-maker's book
+--- how a desk warehouses and hedges the resulting Greek exposure ---
+and closes with guidance on research-report structure and the oral
+presentation.
+
+\textbf{Recitation.} Final dry-run presentations to the cohort, with
+feedback focused on the questions an industry audience would ask.
+
+\textbf{Required Reading.} Guéant (2016), the chapter most relevant to
+the chosen extension; El Aoud and Abergel (2015) (re-read with the
+extension in mind); one additional paper relevant to the chosen
+extension; for the guest session, a short structured-products primer
+distributed in advance.
+
+\textbf{Problem Set 10 (Python/PyTorch).} A one-page extension proposal;
+a PyTorch implementation of the chosen advanced Avellaneda--Stoikov
+extension on top of the milestone infrastructure; a quantitative
+comparison against the Week 9 baseline; the final report (≤ 30 pages);
+and the final twenty-minute presentation. See the Problem Sets booklet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Comprehensive Reference
+List}\label{comprehensive-reference-list}
+
+\subsubsection{4.1 Primary References}\label{primary-references}
+
+Avellaneda, M., and Stoikov, S. (2008). High-frequency trading in a
+limit order book. \emph{Quantitative Finance}, 8(3), 217--224.
+
+El Aoud, S., and Abergel, F. (2015). A stochastic control approach to
+option market making. \emph{Market Microstructure and Liquidity}, 1(1),
+1550006.
+
+Guéant, O. (2016). \emph{The Financial Mathematics of Market Liquidity:
+From Optimal Execution to Market Making}. Chapman \& Hall / CRC.
+
+Cartea, Á., Jaikumar, S., and Penalva, J. (2015). \emph{Algorithmic and
+High-Frequency Trading}. Cambridge University Press.
+
+\subsubsection{4.2 Volatility Surface and Options
+Pricing}\label{volatility-surface-and-options-pricing}
+
+Gatheral, J. (2006). \emph{The Volatility Surface: A Practitioner's
+Guide}. Wiley Finance.
+
+Gatheral, J., and Jacquier, A. (2014). Arbitrage-free SVI volatility
+surfaces. \emph{Quantitative Finance}, 14(1), 59--71.
+
+Hagan, P. S., Kumar, D., Lesniewski, A. S., and Woodward, D. E. (2002).
+Managing smile risk. \emph{Wilmott Magazine}, September, 84--108.
+
+Jäckel, P. (2015). Let's be rational. \emph{Wilmott Magazine}.
+
+Hull, J. C. (2021). \emph{Options, Futures, and Other Derivatives} (11th
+ed.). Pearson.
+
+Taleb, N. N. (1997). \emph{Dynamic Hedging: Managing Vanilla and Exotic
+Options}. Wiley.
+
+\subsubsection{4.3 Fast Computation
+Methods}\label{fast-computation-methods}
+
+Carr, P., and Madan, D. (1999). Option valuation using the fast Fourier
+transform. \emph{Journal of Computational Finance}, 2(4), 61--73.
+
+Fang, F., and Oosterlee, C. W. (2008). A novel pricing method for
+European options based on Fourier-cosine series expansions. \emph{SIAM
+Journal on Scientific Computing}, 31(2), 826--848.
+
+Glasserman, P. (2003). \emph{Monte Carlo Methods in Financial
+Engineering}. Springer.
+
+\subsubsection{4.4 Stochastic Optimal
+Control}\label{stochastic-optimal-control}
+
+Pham, H. (2009). \emph{Continuous-time Stochastic Control and
+Optimization with Financial Applications}. Springer.
+
+Fleming, W. H., and Soner, H. M. (2006). \emph{Controlled Markov
+Processes and Viscosity Solutions} (2nd ed.). Springer.
+
+Øksendal, B. (2003). \emph{Stochastic Differential Equations} (6th ed.).
+Springer.
+
+\subsubsection{4.5 Market Microstructure}\label{market-microstructure}
+
+Roll, R. (1984). A simple implicit measure of the effective bid-ask
+spread. \emph{Journal of Finance}, 39(4), 1127--1139.
+
+Glosten, L. R., and Milgrom, P. R. (1985). Bid, ask and transaction
+prices in a specialist market with heterogeneously informed traders.
+\emph{Journal of Financial Economics}, 14(1), 71--100.
+
+Kyle, A. S. (1985). Continuous auctions and insider trading.
+\emph{Econometrica}, 53(6), 1315--1335.
+
+\subsubsection{4.6 Software and Tooling}\label{software-and-tooling}
+
+Jakob, W., Rhinelander, J., and Moldovan, D. (2017). \emph{pybind11 ---
+Seamless operability between C++11 and Python}.
+https://github.com/pybind/pybind11
+
+Paszke, A., et al.~(2019). PyTorch: an imperative style,
+high-performance deep learning library. \emph{NeurIPS}.
+
+\subsubsection{4.7 Supplementary}\label{supplementary}
+
+Bailey, D. H., and López de Prado, M. (2014). The deflated Sharpe ratio.
+\emph{Journal of Portfolio Management}, 40(5), 94--107.
+
+López de Prado, M. (2018). \emph{Advances in Financial Machine
+Learning}. Wiley.
+
+Almgren, R., and Chriss, N. (2001). Optimal execution of portfolio
+transactions. \emph{Journal of Risk}, 3(2), 5--40.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Appendix A. Coincall Dataset
+Catalog}\label{appendix-a.-coincall-dataset-catalog}
+
+All datasets are delivered as Parquet files on a secure object store
+under a non-disclosure agreement. The naming convention is
+\texttt{coincall\_\{instrument\}\_\{data\_type\}\_\{period\}.parquet}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Order book data} --- L2 snapshots (top ten levels per side),
+  at 1-second resolution for options and 100 ms for perpetual futures,
+  each row carrying bid/ask prices and sizes per level, a strictly
+  increasing sequence number, and an exchange timestamp. L2 is
+  sufficient for both intensity calibration and the simulation
+  environment.
+\item
+  \textbf{Trade data} --- the full trade tape (contract id, price, size,
+  aggressor side, trade id); options trades additionally carry the mark
+  implied volatility at trade time, used for surface calibration in Week
+  6 and the fill simulator in Week 9.
+\item
+  \textbf{Surface data} --- calibrated SVI parameters at five-minute
+  frequency, used as a baseline for the fast revaluation pipeline in
+  Week 7.
+\item
+  \textbf{Auxiliary data} --- hourly perpetual-futures funding rates
+  (for hedging cost accounting in Week 9) and a static snapshot of
+  contract specifications.
+\end{itemize}
+
+Students receive credentials to a secure S3-compatible endpoint at the
+start of the program. Data may be downloaded locally for analysis but
+may not be redistributed. Coincall retains the right to update the
+dataset catalog during the program with at least one week of notice.
+
+\end{document}
