@@ -65,10 +65,18 @@ raise proposed changes with the mentor.
 
 The program is mentored by Dendi Suhubdy, who sets direction, delivers the
 main lectures, and makes final decisions on grading disputes and milestone
-evaluations. Standing channels: a weekly thirty-minute tutor–mentor sync;
-a shared Slack workspace (mentor responds within 24 business hours); and a
-direct phone line for crises (⚑ student in acute distress, suspected
-integrity violation, data-security incident) — use sparingly.
+evaluations. The mentor contributes on a volunteer basis alongside a
+full-time role, so there is **no fixed weekly sync** — communication is
+**asynchronous, by email and Telegram**, with the mentor aiming to respond
+within a few business days. Tutors batch non-urgent items into a periodic
+written update rather than expecting a standing meeting, and arrange a live
+call only when something genuinely needs one. For genuine crises (⚑ student
+in acute distress, suspected integrity violation, data-security incident),
+contact the mentor directly by phone/Telegram and flag it as urgent.
+
+Because the mentor's availability is limited, tutors own the day-to-day
+program and should resolve what they can independently, escalating to the
+mentor only what truly requires the mentor's decision.
 
 Note that two lectures are delivered by a **guest practitioner**, Fenni
 Kang (Chief Strategy Officer, Coincall): the taker-strategies session in

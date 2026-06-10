@@ -1,0 +1,74 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\definecolor{ncsured}{HTML}{CC0000}
+\definecolor{ncsudk}{HTML}{990000}
+\setbeamercolor{structure}{fg=ncsured}
+\setbeamercolor{frametitle}{fg=white,bg=ncsured}
+\setbeamercolor{title}{fg=ncsudk}
+\setbeamercolor{itemize item}{fg=ncsured}
+\setbeamercolor{itemize subitem}{fg=ncsured}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip2pt%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.3cm]{frametitle}%
+  \bfseries\insertframetitle%
+  \end{beamercolorbox}}
+\setbeamertemplate{footline}{%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1ex,leftskip=.3cm,rightskip=.3cm]{}%
+  \tiny Optimal Market Making for Cryptocurrency Options \hfill Week 1 \hfill \insertframenumber%
+  \end{beamercolorbox}}}
+
+\title{Week 1: Introduction}
+\subtitle{Program overview, tooling, and data}
+\date{North Carolina State University \,\textbar\, Summer 2026}
+\titlegraphic{\includegraphics[width=4.2cm]{/Users/dendisuhubdy/Github/ncsu/assets/ncsu_logo.png}}
+\begin{document}
+\begin{frame}[plain]\titlepage
+\begin{center}\tiny Industry Mentor: Dendi Suhubdy (Bitwyre)  ·  Guest: Fenni Kang (Coincall)\end{center}\end{frame}
+\begin{frame}{Welcome to the Program}
+\begin{itemize}
+  \item A 10-week summer research program on optimal market making for crypto options
+  \item Goal: design, implement, and evaluate quoting strategies on real Coincall data
+  \item You will produce a research-grade report and a working code repository
+  \item This week: orientation, environment setup, and data access
+\end{itemize}\end{frame}
+\begin{frame}{Maker vs. Taker}
+\begin{itemize}
+  \item A market maker continuously quotes both sides and earns the spread
+  \item A taker crosses the spread to execute immediately
+  \item We build the maker's side; in Week 9 a Coincall practitioner covers taker strategies
+  \item The spread is compensation for committing to quotes under uncertainty
+\end{itemize}\end{frame}
+\begin{frame}{The Spine: Avellaneda-Stoikov}
+\begin{itemize}
+  \item The whole course is organized around the Avellaneda-Stoikov framework
+  \item Introduced Week 3; turned into a calibrated engine Week 5
+  \item Extended to multi-Greek options inventory Week 8
+  \item Advanced extensions (multi-asset, adverse selection, robust) in Week 10
+\end{itemize}\end{frame}
+\begin{frame}{Tooling}
+\begin{itemize}
+  \item Problem sets: Python + PyTorch (autograd does the differentiation for you)
+  \item You will NOT hand-roll algorithmic differentiation
+  \item Fast-computation week (Week 7): C++ exposed to Python via pybind11
+  \item Industry pattern: Python for research, C++ for the hot path
+\end{itemize}\end{frame}
+\begin{frame}{Data, Milestones, Assessment}
+\begin{itemize}
+  \item Coincall BTC/ETH order books, trades, options chains, funding rates
+  \item Milestone 1 (Wk5): Avellaneda-Stoikov engine
+  \item Milestone 2 (Wk7): fast pricing \& Greeks library
+  \item Milestone 3 (Wk9): full options market-making backtest
+  \item Grade: problem sets 30\%, milestones 30\%, final 30\%, participation 10\%
+\end{itemize}\end{frame}
+\begin{frame}{This Week's To-Do}
+\begin{itemize}
+  \item Set up Python + PyTorch and a C++17 toolchain with CMake
+  \item Build and import the pybind11 'hello world' starter module
+  \item Get your Coincall data credentials and sign the data-use agreement
+  \item No graded problem set this week
+\end{itemize}\end{frame}
+\end{document}

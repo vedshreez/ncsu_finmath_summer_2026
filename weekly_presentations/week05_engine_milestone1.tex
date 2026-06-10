@@ -1,0 +1,58 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\definecolor{ncsured}{HTML}{CC0000}
+\definecolor{ncsudk}{HTML}{990000}
+\setbeamercolor{structure}{fg=ncsured}
+\setbeamercolor{frametitle}{fg=white,bg=ncsured}
+\setbeamercolor{title}{fg=ncsudk}
+\setbeamercolor{itemize item}{fg=ncsured}
+\setbeamercolor{itemize subitem}{fg=ncsured}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip2pt%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.3cm]{frametitle}%
+  \bfseries\insertframetitle%
+  \end{beamercolorbox}}
+\setbeamertemplate{footline}{%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1ex,leftskip=.3cm,rightskip=.3cm]{}%
+  \tiny Optimal Market Making for Cryptocurrency Options \hfill Week 5 \hfill \insertframenumber%
+  \end{beamercolorbox}}}
+
+\title{Week 5: The Avellaneda-Stoikov Engine}
+\subtitle{Implementation, calibration, and backtest -- Milestone 1}
+\date{North Carolina State University \,\textbar\, Summer 2026}
+\titlegraphic{\includegraphics[width=4.2cm]{/Users/dendisuhubdy/Github/ncsu/assets/ncsu_logo.png}}
+\begin{document}
+\begin{frame}[plain]\titlepage
+\begin{center}\tiny Industry Mentor: Dendi Suhubdy (Bitwyre)  ·  Guest: Fenni Kang (Coincall)\end{center}\end{frame}
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Implement the quotes as a clean, tested PyTorch engine
+  \item Calibrate the order-flow intensities by maximum likelihood
+  \item Build an event-driven backtest and benchmark on Coincall data
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 1: From Closed Form to Code}
+\begin{itemize}
+  \item Engine architecture; state management from the L2 book
+  \item Mapping continuous-time quantities to discrete events
+  \item Calibrating lambda(d) = A exp(-kappa d) from fill data
+  \item Pitfalls: units, cash-process sign, inventory indexing
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 2: Calibration \& Validation}
+\begin{itemize}
+  \item Maximum-likelihood fit of A and kappa with goodness-of-fit
+  \item The backtest harness: replay, fill simulator, P\&L attribution
+  \item Validate the P\&L distribution against theory
+  \item Reproducibility under a fixed seed
+\end{itemize}\end{frame}
+\begin{frame}{Milestone 1 Deliverable}
+\begin{itemize}
+  \item Python/PyTorch Avellaneda-Stoikov package on one linear asset
+  \item Calibration + simulation + one-month BTC-PERP backtest
+  \item Acceptance: quotes match closed form; P\&L within +/-50\% of reference
+  \item pytest coverage; report \textless{}= 10 pages
+\end{itemize}\end{frame}
+\end{document}

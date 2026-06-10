@@ -28,6 +28,13 @@ theme (Wolfpack Red `#CC0000`, Arial) from
 The original GLFT-centered materials are preserved as
 `glft_options_mm_*.{docx,pdf}` for reference.
 
+### Weekly student presentations
+
+`weekly_presentations/` holds a student-facing deck for each of the 10
+weeks (Week 1 = introduction), as both a **PDF** (LaTeX Beamer) and a
+**PPTX** (NC State theme). Regenerate with `python build_weekly.py`
+followed by `pdflatex` on each `week*.tex`.
+
 ## Key design points
 
 - **Avellaneda–Stoikov** is the central framework (GLFT removed). The

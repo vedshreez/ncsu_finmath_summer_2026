@@ -156,11 +156,20 @@ students after each deadline) as a separate **Solutions** booklet.
 
 ### 1.6 Mentorship Model
 
-Students will have access to weekly thirty-minute one-on-one office hours
-with the industry mentor, in addition to scheduled lectures and
-recitations. Office hours are intended for clarification of difficult
-material, code review of milestone deliverables, and discussion of
-research directions for the final week.
+Because the industry mentor contributes on a volunteer basis alongside a
+full-time role, mentorship is primarily **asynchronous** and carries **no
+fixed weekly time commitment**. The mentor is reachable by **email and
+Telegram**, and aims to respond within a few business days. This channel
+is intended for clarification of difficult material, code review of
+milestone deliverables, and discussion of research directions for the
+final week; students should send specific, well-prepared questions
+(including a minimal reproducible code snippet where relevant).
+
+When a question genuinely needs a live conversation, **bespoke one-on-one
+sessions are arranged ad hoc**, subject to the mentor's availability,
+rather than on a standing weekly schedule. Day-to-day support — recitation,
+office hours, and first-pass grading — is provided by the program tutors,
+who escalate to the mentor as needed.
 
 ### 1.7 Guest Practitioner Sessions
 

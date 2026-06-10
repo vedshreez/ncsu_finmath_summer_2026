@@ -1,0 +1,64 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\definecolor{ncsured}{HTML}{CC0000}
+\definecolor{ncsudk}{HTML}{990000}
+\setbeamercolor{structure}{fg=ncsured}
+\setbeamercolor{frametitle}{fg=white,bg=ncsured}
+\setbeamercolor{title}{fg=ncsudk}
+\setbeamercolor{itemize item}{fg=ncsured}
+\setbeamercolor{itemize subitem}{fg=ncsured}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip2pt%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.3cm]{frametitle}%
+  \bfseries\insertframetitle%
+  \end{beamercolorbox}}
+\setbeamertemplate{footline}{%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1ex,leftskip=.3cm,rightskip=.3cm]{}%
+  \tiny Optimal Market Making for Cryptocurrency Options \hfill Week 2 \hfill \insertframenumber%
+  \end{beamercolorbox}}}
+
+\title{Week 2: Foundations of Market Microstructure}
+\subtitle{From limit order books to the role of the market maker}
+\date{North Carolina State University \,\textbar\, Summer 2026}
+\titlegraphic{\includegraphics[width=4.2cm]{/Users/dendisuhubdy/Github/ncsu/assets/ncsu_logo.png}}
+\begin{document}
+\begin{frame}[plain]\titlepage
+\begin{center}\tiny Industry Mentor: Dendi Suhubdy (Bitwyre)  ·  Guest: Fenni Kang (Coincall)\end{center}\end{frame}
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Reconstruct a limit order book from raw exchange events
+  \item Decompose the bid-ask spread into its three classical components
+  \item Explain the market maker as a continuous liquidity provider
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 1: Order Book Mechanics}
+\begin{itemize}
+  \item Order types: market, limit, IOC, post-only, hidden
+  \item Price-time priority and the matching algorithm
+  \item L1 / L2 / L3 views; tick size and lot size
+  \item Coincall architecture: contracts, fees, market-maker tiers
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 2: Spread Decomposition}
+\begin{itemize}
+  \item Adverse selection, inventory, and order-processing costs
+  \item Roll (1984): effective spread from trade prices
+  \item Glosten-Milgrom (1985): asymmetric information
+  \item Kyle (1985): the strategic informed trader
+  \item Realized spread, effective spread, price impact
+\end{itemize}\end{frame}
+\begin{frame}{Recitation}
+\begin{itemize}
+  \item Build an L2 order-book reconstructor in Python
+  \item Replay one hour of Coincall BTC-PERP events
+  \item Emit a CSV of mid-price, spread, and depth
+  \item Watch out: delete price levels that empty after a cancel
+\end{itemize}\end{frame}
+\begin{frame}{Reading \& Problem Set 2 (Python)}
+\begin{itemize}
+  \item Cartea-Jaikumar-Penalva Ch. 1-3; Roll (1984); Glosten-Milgrom (1985)
+  \item PS2: order book, Roll estimator, Glosten-Milgrom, toxicity
+\end{itemize}\end{frame}
+\end{document}

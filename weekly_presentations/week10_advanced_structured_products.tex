@@ -1,0 +1,58 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\definecolor{ncsured}{HTML}{CC0000}
+\definecolor{ncsudk}{HTML}{990000}
+\setbeamercolor{structure}{fg=ncsured}
+\setbeamercolor{frametitle}{fg=white,bg=ncsured}
+\setbeamercolor{title}{fg=ncsudk}
+\setbeamercolor{itemize item}{fg=ncsured}
+\setbeamercolor{itemize subitem}{fg=ncsured}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip2pt%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.3cm]{frametitle}%
+  \bfseries\insertframetitle%
+  \end{beamercolorbox}}
+\setbeamertemplate{footline}{%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1ex,leftskip=.3cm,rightskip=.3cm]{}%
+  \tiny Optimal Market Making for Cryptocurrency Options \hfill Week 10 \hfill \insertframenumber%
+  \end{beamercolorbox}}}
+
+\title{Week 10: Advanced Avellaneda-Stoikov, Structured Products, and Final Presentations}
+\subtitle{Extensions, the corporate view, and communicating results (Coincall guest session)}
+\date{North Carolina State University \,\textbar\, Summer 2026}
+\titlegraphic{\includegraphics[width=4.2cm]{/Users/dendisuhubdy/Github/ncsu/assets/ncsu_logo.png}}
+\begin{document}
+\begin{frame}[plain]\titlepage
+\begin{center}\tiny Industry Mentor: Dendi Suhubdy (Bitwyre)  ·  Guest: Fenni Kang (Coincall)\end{center}\end{frame}
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Implement one advanced Avellaneda-Stoikov extension
+  \item Understand how corporates use options via structured products
+  \item Write and present a research-grade report
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 1: Advanced Extensions}
+\begin{itemize}
+  \item Multi-asset market making across BTC and ETH options
+  \item Adverse-selection-aware and signal-driven quoting
+  \item Discrete-inventory formulations
+  \item Robust optimization with a worst-case inventory penalty
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 2 (Guest: Fenni Kang, Coincall): Structured Products}
+\begin{itemize}
+  \item Collars to fix a price band on a holding
+  \item Accumulators / decumulators for staged accumulation or liquidation
+  \item Coupon / yield-enhancement products
+  \item How structured-product flow lands on the market-maker's book
+\end{itemize}\end{frame}
+\begin{frame}{Final Deliverables}
+\begin{itemize}
+  \item One-page extension proposal (day one)
+  \item PyTorch implementation on the milestone infrastructure
+  \item Quantitative comparison vs. the Week-9 baseline
+  \item Final report (\textless{}= 30 pages) and 20-minute presentation
+\end{itemize}\end{frame}
+\end{document}

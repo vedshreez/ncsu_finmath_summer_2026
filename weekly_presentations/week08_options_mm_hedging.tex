@@ -1,0 +1,57 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\definecolor{ncsured}{HTML}{CC0000}
+\definecolor{ncsudk}{HTML}{990000}
+\setbeamercolor{structure}{fg=ncsured}
+\setbeamercolor{frametitle}{fg=white,bg=ncsured}
+\setbeamercolor{title}{fg=ncsudk}
+\setbeamercolor{itemize item}{fg=ncsured}
+\setbeamercolor{itemize subitem}{fg=ncsured}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip2pt%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.3cm]{frametitle}%
+  \bfseries\insertframetitle%
+  \end{beamercolorbox}}
+\setbeamertemplate{footline}{%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1ex,leftskip=.3cm,rightskip=.3cm]{}%
+  \tiny Optimal Market Making for Cryptocurrency Options \hfill Week 8 \hfill \insertframenumber%
+  \end{beamercolorbox}}}
+
+\title{Week 8: Options Market Making Theory and Dynamic Hedging}
+\subtitle{Avellaneda-Stoikov with a vector-valued inventory}
+\date{North Carolina State University \,\textbar\, Summer 2026}
+\titlegraphic{\includegraphics[width=4.2cm]{/Users/dendisuhubdy/Github/ncsu/assets/ncsu_logo.png}}
+\begin{document}
+\begin{frame}[plain]\titlepage
+\begin{center}\tiny Industry Mentor: Dendi Suhubdy (Bitwyre)  ·  Guest: Fenni Kang (Coincall)\end{center}\end{frame}
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Set up the El Aoud-Abergel multi-Greek framework
+  \item Understand the inventory penalty as a quadratic form
+  \item Quantify the P\&L attribution of a hedged options book
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 1: Multi-Greek Inventory \& HJB}
+\begin{itemize}
+  \item Inventory becomes a vector of Greeks (delta, gamma, vega, ...)
+  \item Quadratic inventory penalty and its economic meaning
+  \item The multi-Greek HJB and separation ansatz
+  \item Reduces to Avellaneda-Stoikov in the 1-D case
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 2: Dynamic Hedging}
+\begin{itemize}
+  \item Continuous and discrete delta hedging
+  \item The gamma-theta-variance identity (the key to options trading)
+  \item External vs. integrated hedging architectures
+  \item Perpetual futures as the hedge instrument; funding cost
+\end{itemize}\end{frame}
+\begin{frame}{Recitation \& Problem Set 8 (Python/PyTorch)}
+\begin{itemize}
+  \item Multi-Greek HJB walk-through; PyTorch hedged-book simulation
+  \item PS8: inventory dynamics, penalty calibration, threshold hedger
+  \item Reading: El Aoud-Abergel (2015); Taleb (1997)
+\end{itemize}\end{frame}
+\end{document}

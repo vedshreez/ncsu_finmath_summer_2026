@@ -1,0 +1,58 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\definecolor{ncsured}{HTML}{CC0000}
+\definecolor{ncsudk}{HTML}{990000}
+\setbeamercolor{structure}{fg=ncsured}
+\setbeamercolor{frametitle}{fg=white,bg=ncsured}
+\setbeamercolor{title}{fg=ncsudk}
+\setbeamercolor{itemize item}{fg=ncsured}
+\setbeamercolor{itemize subitem}{fg=ncsured}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip\vskip2pt%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.4ex,dp=1ex,leftskip=0.3cm]{frametitle}%
+  \bfseries\insertframetitle%
+  \end{beamercolorbox}}
+\setbeamertemplate{footline}{%
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=1ex,leftskip=.3cm,rightskip=.3cm]{}%
+  \tiny Optimal Market Making for Cryptocurrency Options \hfill Week 9 \hfill \insertframenumber%
+  \end{beamercolorbox}}}
+
+\title{Week 9: Backtesting, Risk Analysis, and Taker Strategies}
+\subtitle{Assembling the full system -- Milestone 3 (with a Coincall guest session)}
+\date{North Carolina State University \,\textbar\, Summer 2026}
+\titlegraphic{\includegraphics[width=4.2cm]{/Users/dendisuhubdy/Github/ncsu/assets/ncsu_logo.png}}
+\begin{document}
+\begin{frame}[plain]\titlepage
+\begin{center}\tiny Industry Mentor: Dendi Suhubdy (Bitwyre)  ·  Guest: Fenni Kang (Coincall)\end{center}\end{frame}
+\begin{frame}{Learning Objectives}
+\begin{itemize}
+  \item Build an event-driven backtest for options market making
+  \item Produce a full P\&L attribution and risk metrics
+  \item Understand taker strategies and order-flow toxicity
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 1: Backtest Architecture \& Risk}
+\begin{itemize}
+  \item Event-driven simulation with deterministic replay
+  \item The fill simulator; state tracking of inventory and Greeks
+  \item Pitfalls: look-ahead bias, unrealistic fills, expiry handling
+  \item Sharpe/Calmar, drawdown, block-bootstrap confidence intervals
+\end{itemize}\end{frame}
+\begin{frame}{Lecture 2 (Guest: Fenni Kang, Coincall): Taker Strategies}
+\begin{itemize}
+  \item When and why takers cross the spread
+  \item Signals behind aggressive flow: momentum, liquidations, news
+  \item Execution styles: sweep, TWAP/VWAP, iceberg-taking
+  \item What taker behaviour means for the maker's order-flow toxicity
+\end{itemize}\end{frame}
+\begin{frame}{Milestone 3 Deliverable}
+\begin{itemize}
+  \item Full multi-Greek backtest on 3 months of BTC \& ETH options
+  \item P\&L attribution sums to total within 1 bp; Sharpe with CI
+  \item Greek exposures bounded; drawdown forensic + taker analysis
+  \item Reproducible from config; report \textless{}= 20 pages
+\end{itemize}\end{frame}
+\end{document}
